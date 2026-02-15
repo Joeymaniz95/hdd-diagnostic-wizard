@@ -1,0 +1,79 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Hard drive platters spinning</title>
+  <desc id="desc">Top-down illustration of hard drive platters with concentric rings and rotation indicator.</desc>
+
+  <style>
+    @keyframes platter-rotate-slow {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .platterSpinSlow {
+      transform-origin: 320px 198px;
+      animation: platter-rotate-slow 22s linear infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .platterSpinSlow {
+        animation: none;
+      }
+    }
+  </style>
+
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) rotate(90) scale(210 260)">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F3F5F7"/>
+    </radialGradient>
+    <radialGradient id="platterMain" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) rotate(90) scale(138)">
+      <stop stop-color="#FDFEFF"/>
+      <stop offset="0.58" stop-color="#E8ECF0"/>
+      <stop offset="1" stop-color="#CDD4DB"/>
+    </radialGradient>
+    <radialGradient id="platterInner" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) rotate(90) scale(88)">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9E0E7"/>
+    </radialGradient>
+    <linearGradient id="arrow" x1="462" y1="126" x2="494" y2="174" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9AA5B1"/>
+      <stop offset="1" stop-color="#6E7A88"/>
+    </linearGradient>
+    <filter id="softShadow" x="162" y="52" width="316" height="316" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="12"/>
+      <feGaussianBlur stdDeviation="14"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.12 0 0 0 0 0.16 0 0 0 0 0.22 0 0 0 0.15 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect x="40" y="30" width="560" height="360" rx="26" fill="url(#bg)"/>
+
+  <g filter="url(#softShadow)">
+    <circle cx="320" cy="198" r="132" fill="#E5EAF0" fill-opacity="0.7"/>
+  </g>
+
+  <g class="platterSpinSlow">
+    <circle cx="320" cy="198" r="132" fill="url(#platterMain)"/>
+    <circle cx="320" cy="198" r="118" stroke="#B8C2CD" stroke-width="1.2" opacity="0.7"/>
+    <circle cx="320" cy="198" r="96" stroke="#AEB9C5" stroke-width="1.1" opacity="0.62"/>
+    <circle cx="320" cy="198" r="74" stroke="#A6B1BE" stroke-width="1.1" opacity="0.54"/>
+    <circle cx="320" cy="198" r="52" stroke="#9CA8B6" stroke-width="1" opacity="0.48"/>
+
+    <circle cx="320" cy="198" r="46" fill="url(#platterInner)"/>
+    <circle cx="320" cy="198" r="16" fill="#F8FAFC" stroke="#C3CCD6"/>
+    <circle cx="320" cy="198" r="6" fill="#B7C2CF"/>
+
+    <circle cx="376" cy="124" r="20" fill="#FFFFFF" fill-opacity="0.42"/>
+  </g>
+
+  <path d="M463 132C448 107 418 90 384 90" stroke="url(#arrow)" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M468 111L482 138L452 138" fill="url(#arrow)"/>
+</svg>

@@ -1,0 +1,60 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">3.5 inch enclosure opening guide</title>
+  <desc id="desc">Three-step diagram showing screws, seam prying, and drive sliding out from a 3.5 inch enclosure.</desc>
+  <defs>
+    <linearGradient id="card" x1="80" y1="52" x2="560" y2="368" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F2F5F8"/>
+    </linearGradient>
+    <linearGradient id="shell" x1="102" y1="178" x2="228" y2="258" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E7ECF1"/>
+      <stop offset="1" stop-color="#D3DAE2"/>
+    </linearGradient>
+    <linearGradient id="drive" x1="405" y1="204" x2="515" y2="278" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F9FB"/>
+      <stop offset="1" stop-color="#D9E1E8"/>
+    </linearGradient>
+    <filter id="soft" x="72" y="40" width="496" height="340" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="10"/>
+      <feGaussianBlur stdDeviation="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.12 0 0 0 0 0.16 0 0 0 0 0.2 0 0 0 0.14 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M1 1L10 6L1 11" stroke="#758393" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <g filter="url(#soft)">
+    <rect x="88" y="52" width="464" height="304" rx="24" fill="url(#card)"/>
+  </g>
+
+  <text x="118" y="88" fill="#6B7785" font-size="14" font-family="Arial, Helvetica, sans-serif">Step A</text>
+  <text x="274" y="88" fill="#6B7785" font-size="14" font-family="Arial, Helvetica, sans-serif">Step B</text>
+  <text x="430" y="88" fill="#6B7785" font-size="14" font-family="Arial, Helvetica, sans-serif">Step C</text>
+
+  <rect x="110" y="130" width="118" height="130" rx="12" fill="url(#shell)" stroke="#C2CBD5"/>
+  <circle cx="122" cy="142" r="6" fill="#B6C0CC"/>
+  <circle cx="216" cy="142" r="6" fill="#B6C0CC"/>
+  <circle cx="122" cy="248" r="6" fill="#B6C0CC"/>
+  <circle cx="216" cy="248" r="6" fill="#B6C0CC"/>
+  <line x1="122" y1="142" x2="122" y2="142" stroke="#7E8A97" stroke-width="2"/>
+  <path d="M122 138V146M118 142H126" stroke="#7E8A97" stroke-width="1.4"/>
+  <path d="M216 138V146M212 142H220" stroke="#7E8A97" stroke-width="1.4"/>
+  <path d="M122 244V252M118 248H126" stroke="#7E8A97" stroke-width="1.4"/>
+  <path d="M216 244V252M212 248H220" stroke="#7E8A97" stroke-width="1.4"/>
+
+  <rect x="266" y="130" width="118" height="130" rx="12" fill="#E4EAF0" stroke="#C2CBD5"/>
+  <path d="M274 141H376" stroke="#A5B0BC" stroke-dasharray="4 4"/>
+  <rect x="318" y="108" width="12" height="48" rx="5" fill="#A3AFBC"/>
+  <rect x="314" y="96" width="20" height="18" rx="4" fill="#C4CDD7"/>
+  <path d="M330 146C336 146 342 151 342 158" stroke="#758393" stroke-width="2.2" marker-end="url(#arrow)" fill="none"/>
+
+  <rect x="422" y="134" width="118" height="122" rx="12" fill="#E2E8EF" stroke="#C2CBD5"/>
+  <rect x="394" y="154" width="118" height="122" rx="12" fill="url(#drive)" stroke="#BFC9D3"/>
+  <circle cx="500" cy="165" r="4" fill="#A0ACB9"/>
+  <path d="M430 286H518" stroke="#758393" stroke-width="2.2" marker-end="url(#arrow)"/>
+</svg>
