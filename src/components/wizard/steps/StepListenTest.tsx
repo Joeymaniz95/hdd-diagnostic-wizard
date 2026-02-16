@@ -26,7 +26,7 @@ export default function StepListenTest({
     <StepLayout
       stepLabel="Step 5"
       title="Listen test"
-      subtitle="Power on once, listen carefully, then choose the closest sound pattern."
+      subtitle="Power on the drive, put your ear close to it, listen carefully, then choose the closest sound pattern."
       onBack={onBack}
       onNext={onNext}
       canGoBack={canGoBack}
@@ -39,24 +39,36 @@ export default function StepListenTest({
           <ListenTestIcon />
         </div>
 
-        <p className="relative mt-6 text-center text-[15px] font-medium tracking-[0.01em] text-[#64748b] lg:text-base">
+        <p className="relative mt-6 text-center text-base font-semibold tracking-[0.01em] text-[#334155] lg:text-[17px]">
           Listen carefully to the drive
         </p>
       </section>
 
-      <div className="mt-7 space-y-3 lg:mt-8 lg:space-y-2">
+      <div className="mx-1 mt-7 space-y-3 overflow-visible lg:mt-8 lg:space-y-2">
         {options.map((option) => (
           <button
             key={option.value}
             type="button"
             onClick={() => onChange(option.value)}
-            className={`w-full rounded-xl border px-4 py-4 text-left text-lg font-medium transition ${
+            className={`w-full rounded-xl border-2 px-6 py-5 text-left text-lg font-medium transition-all duration-200 ease-out hover:scale-[1.01] ${
               value === option.value
-                ? "border-slate-900 bg-slate-900 text-white"
-                : "border-slate-300 bg-white text-slate-900 hover:border-slate-500"
+                ? "border-[#1a73e8] bg-[#e8f0fe] text-[#174ea6] shadow-[0_2px_8px_rgba(26,115,232,0.16)]"
+                : "border-[#e8eaed] bg-white text-slate-900 hover:-translate-y-0.5 hover:border-[#1a73e8] hover:bg-[#f8f9fa] hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)]"
             }`}
           >
-            {option.label}
+            <span className="flex items-center justify-between gap-3">
+              <span>{option.label}</span>
+              <span
+                className={`inline-flex h-6 w-6 items-center justify-center rounded-full border text-sm ${
+                  value === option.value
+                    ? "border-[#1a73e8] bg-[#1a73e8] text-white"
+                    : "border-[#cfd8dc] bg-white text-transparent"
+                }`}
+                aria-hidden="true"
+              >
+                ✓
+              </span>
+            </span>
           </button>
         ))}
       </div>
@@ -65,9 +77,15 @@ export default function StepListenTest({
         <p className="font-semibold text-slate-900">What each option usually means</p>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-700">
           <li>Not spinning: likely power or board issue.</li>
-          <li>Spins, then spins down: drive may be struggling internally.</li>
-          <li>Clicking: the read heads may be failing.</li>
-          <li>Spins and stays spinning: often safer to continue with software checks.</li>
+          <li>
+            Spins, then spins down: the heads have most likely failed and will not initialize, so
+            the drive powers down.
+          </li>
+          <li>Clicking: one or more of the read/write heads have failed.</li>
+          <li>
+            Spins and stays spinning: this is a good sign that the drive may not have mechanical
+            failures.
+          </li>
         </ul>
       </div>
 
