@@ -76,23 +76,23 @@ export default function Wizard() {
 
   function scrollToTop() {
     if (typeof window === "undefined") return;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
   }
 
   function goNext() {
+    scrollToTop();
     setCurrentStepIndex((previous) => {
       const safePrevious = Math.min(previous, steps.length - 1);
       return Math.min(safePrevious + 1, steps.length - 1);
     });
-    scrollToTop();
   }
 
   function goBack() {
+    scrollToTop();
     setCurrentStepIndex((previous) => {
       const safePrevious = Math.min(previous, steps.length - 1);
       return Math.max(safePrevious - 1, 0);
     });
-    scrollToTop();
   }
 
   function restart() {
