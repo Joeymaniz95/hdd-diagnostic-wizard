@@ -22,6 +22,9 @@ export default function StepHowDriveWorks({
           those disks while reading data. If a drive is unstable, repeated power cycling or heavy
           scans can make damage worse.
         </p>
+        <p className="mt-3 text-[16px] leading-7 text-[#5f6368]">
+          Understanding these basics will help the next steps feel simple and clear.
+        </p>
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:mt-3 lg:gap-3">
@@ -49,13 +52,6 @@ export default function StepHowDriveWorks({
           <p className="mt-2 text-center text-sm font-medium text-[#5f6368]">Heads (hovering)</p>
         </div>
       </div>
-
-      <details className="mt-4 rounded-xl border border-[#dadce0] bg-white p-4 lg:mt-3 lg:p-3">
-        <summary className="cursor-pointer text-sm font-semibold text-[#202124]">Why we ask this</summary>
-        <p className="mt-2 text-[14px] leading-6 text-[#5f6368] lg:text-[13px] lg:leading-5">
-          These basics explain why we prioritize low-stress recovery steps before deeper diagnostics.
-        </p>
-      </details>
 
       <details className="mt-3 rounded-xl border border-[#f2c8c8] bg-[#fef7f7] p-4 lg:p-3">
         <summary className="cursor-pointer text-sm font-semibold text-[#b3261e]">Do NOT do this</summary>

@@ -25,7 +25,7 @@ export default function ProgressBar({ currentStep, totalSteps }: ProgressBarProp
       </div>
 
       <div
-        className="relative h-[6px] w-full overflow-hidden rounded-full bg-[#e8eaed]"
+        className="relative h-[6px] w-full overflow-visible rounded-full bg-[#e8eaed]"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={100}
@@ -37,8 +37,8 @@ export default function ProgressBar({ currentStep, totalSteps }: ProgressBarProp
           aria-hidden="true"
         >
           <span className="progress-sheen absolute inset-y-0 left-[-40%] w-[45%]" aria-hidden="true" />
-          <span className="progress-thumb absolute right-0 top-1/2" aria-hidden="true" />
         </div>
+        <span className="progress-thumb absolute top-1/2 z-10" style={{ left: `${progress}%` }} aria-hidden="true" />
       </div>
     </section>
   );
