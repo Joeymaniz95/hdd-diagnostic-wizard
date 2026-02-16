@@ -74,11 +74,17 @@ export default function Wizard() {
     console.log("[Wizard] step change", { currentStepIndex: boundedStepIndex, currentStep });
   }, [boundedStepIndex, currentStep]);
 
+  function scrollToTop() {
+    if (typeof window === "undefined") return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   function goNext() {
     setCurrentStepIndex((previous) => {
       const safePrevious = Math.min(previous, steps.length - 1);
       return Math.min(safePrevious + 1, steps.length - 1);
     });
+    scrollToTop();
   }
 
   function goBack() {
@@ -86,6 +92,7 @@ export default function Wizard() {
       const safePrevious = Math.min(previous, steps.length - 1);
       return Math.max(safePrevious - 1, 0);
     });
+    scrollToTop();
   }
 
   function restart() {
