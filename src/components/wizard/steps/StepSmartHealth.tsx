@@ -61,30 +61,29 @@ export default function StepSmartHealth({
     <StepLayout
       stepLabel="Step 6"
       title="Step 6 — Check drive health (CrystalDiskInfo)"
-      subtitle="This quick check tells us if it's safe to continue."
       onBack={onBack}
       onNext={onNext}
       canGoBack={canGoBack}
       canGoNext={canGoNext}
       nextLabel={nextLabel}
     >
-      <ul className="list-disc space-y-1 pl-5 text-slate-700">
+      <ul className="list-disc space-y-1 pl-5 text-[15px] text-[#3c4043] lg:text-[14px]">
         <li>Download and install CrystalDiskInfo (Windows).</li>
         <li>Open CrystalDiskInfo.</li>
         <li>Look for your problem drive in the list.</li>
         <li>Then choose what you see below.</li>
       </ul>
 
-      <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <div className="mt-3 rounded-2xl border border-[#dadce0] bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
         <a
           href="https://crystalmark.info/en/software/crystaldiskinfo/"
           target="_blank"
           rel="noreferrer noopener"
-          className="inline-flex rounded-xl bg-slate-900 px-5 py-3 font-medium text-white transition hover:bg-slate-800"
+          className="inline-flex rounded-[24px] bg-[#1a73e8] px-6 py-3 text-sm font-medium text-white shadow-[0_1px_2px_rgba(26,115,232,0.25)] transition-all duration-200 hover:-translate-y-px hover:bg-[#1557b0] hover:shadow-[0_6px_14px_rgba(26,115,232,0.3)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1a73e8] focus-visible:outline-offset-2"
         >
           Download CrystalDiskInfo
         </a>
-        <p className="mt-2 text-sm text-slate-600">Windows only.</p>
+        <p className="mt-2 text-sm text-[#5f6368]">Windows only.</p>
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-3">
@@ -93,7 +92,7 @@ export default function StepSmartHealth({
             key={option.value}
             type="button"
             onClick={() => onChange(option.value)}
-            className="rounded-2xl border p-4 text-left shadow-sm transition duration-200 hover:-translate-y-0.5"
+            className="rounded-2xl border p-4 text-left transition-all duration-200 hover:-translate-y-0.5"
             style={{
               borderColor: option.border,
               backgroundColor: option.background,
@@ -102,7 +101,7 @@ export default function StepSmartHealth({
               boxShadow:
                 value === option.value
                   ? selectedGlow(option.value)
-                  : "0 3px 10px rgba(15,23,42,0.05)",
+                  : "0 1px 3px rgba(0,0,0,0.10)",
             }}
           >
             <div className="flex items-center gap-2">
@@ -113,14 +112,14 @@ export default function StepSmartHealth({
               />
               <p className="text-lg font-semibold">{option.label}</p>
             </div>
-            <p className="mt-2 text-sm text-slate-600">{option.subtext}</p>
+            <p className="mt-2 text-sm text-[#5f6368]">{option.subtext}</p>
           </button>
         ))}
       </div>
 
       {showBadWarning ? (
         <div className="mt-3 rounded-xl border border-[#FCA5A5] bg-[#FEF2F2] p-4 text-[#B91C1C]">
-          <p className="font-semibold">⚠ High Risk of Failure</p>
+          <p className="font-semibold">High risk of failure</p>
           <p className="mt-2">
             If CrystalDiskInfo shows &lsquo;Bad&rsquo;, the drive is actively failing. Continuing DIY
             recovery can permanently destroy your data. Professional recovery is strongly
@@ -129,7 +128,7 @@ export default function StepSmartHealth({
           <div className="mt-4">
             <button
               type="button"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-800 transition hover:bg-slate-50"
+              className="rounded-xl border border-[#dadce0] bg-white px-4 py-2 text-sm font-medium text-[#3c4043] transition hover:bg-[#f8f9fa]"
             >
               Get Professional Recovery Quote
             </button>

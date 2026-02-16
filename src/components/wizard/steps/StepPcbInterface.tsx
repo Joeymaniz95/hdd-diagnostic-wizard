@@ -11,15 +11,14 @@ export default function StepPcbInterface({
     <StepLayout
       stepLabel="Step 3"
       title="Remove the USB Adapter (If Present)"
-      subtitle="Instruction step"
       onBack={onBack}
       onNext={onNext}
       canGoBack={canGoBack}
       canGoNext={canGoNext}
     >
-      <p className="text-slate-700">
-        Now that the drive is out of the enclosure, check the circuit board (PCB) on the bottom.
-      </p>
+      <div className="rounded-xl border border-slate-200 bg-white p-4 text-slate-700 shadow-sm">
+        <p>Now that the drive is out of the enclosure, check the circuit board (PCB) on the bottom.</p>
+      </div>
 
       <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-slate-700 lg:mt-3">
         <p>If your drive has a removable USB adapter board (USB-to-SATA bridge), disconnect it.</p>

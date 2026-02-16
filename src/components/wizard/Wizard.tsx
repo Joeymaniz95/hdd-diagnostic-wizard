@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import ProgressBar from "@/src/components/wizard/ProgressBar";
 import StepConnectionGuidance from "@/src/components/wizard/steps/StepConnectionGuidance";
 import StepExternalEnclosure from "@/src/components/wizard/steps/StepExternalEnclosure";
 import StepHowDriveWorks from "@/src/components/wizard/steps/StepHowDriveWorks";
@@ -94,89 +95,95 @@ export default function Wizard() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl">
-      {currentStep === "how_drive_works" ? (
-        <StepHowDriveWorks
-          onBack={goBack}
-          onNext={goNext}
-          canGoBack={canGoBack}
-          canGoNext={canGoNext}
-        />
-      ) : null}
+    <div className="w-full">
+      <div className="mb-6 pb-4 sm:mb-7">
+        <ProgressBar currentStep={boundedStepIndex + 1} totalSteps={steps.length} />
+      </div>
 
-      {currentStep === "external_enclosure" ? (
-        <StepExternalEnclosure
-          value={answers.externalEnclosure}
-          onChange={(value) => setAnswers((prev) => ({ ...prev, externalEnclosure: value }))}
-          onBack={goBack}
-          onNext={goNext}
-          canGoBack={canGoBack}
-          canGoNext={canGoNext}
-        />
-      ) : null}
+      <div key={currentStep} className="step-enter">
+        {currentStep === "how_drive_works" ? (
+          <StepHowDriveWorks
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
 
-      {currentStep === "pcb_interface" ? (
-        <StepPcbInterface
-          onBack={goBack}
-          onNext={goNext}
-          canGoBack={canGoBack}
-          canGoNext={canGoNext}
-        />
-      ) : null}
+        {currentStep === "external_enclosure" ? (
+          <StepExternalEnclosure
+            value={answers.externalEnclosure}
+            onChange={(value) => setAnswers((prev) => ({ ...prev, externalEnclosure: value }))}
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
 
-      {currentStep === "connection_guidance" ? (
-        <StepConnectionGuidance
-          onBack={goBack}
-          onNext={goNext}
-          canGoBack={canGoBack}
-          canGoNext={canGoNext}
-        />
-      ) : null}
+        {currentStep === "pcb_interface" ? (
+          <StepPcbInterface
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
 
-      {currentStep === "listen_test" ? (
-        <StepListenTest
-          value={answers.listenTest}
-          onChange={(value) => setAnswers((prev) => ({ ...prev, listenTest: value }))}
-          onBack={goBack}
-          onNext={goNext}
-          canGoBack={canGoBack}
-          canGoNext={canGoNext}
-        />
-      ) : null}
+        {currentStep === "connection_guidance" ? (
+          <StepConnectionGuidance
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
 
-      {currentStep === "smart_health" ? (
-        <StepSmartHealth
-          value={answers.smart.smartHealth}
-          onChange={(value) =>
-            setAnswers((prev) => ({
-              ...prev,
-              smart: {
-                ...prev.smart,
-                smartHealth: value,
-              },
-            }))
-          }
-          onBack={goBack}
-          onNext={goNext}
-          canGoBack={canGoBack}
-          canGoNext={canGoNext}
-        />
-      ) : null}
+        {currentStep === "listen_test" ? (
+          <StepListenTest
+            value={answers.listenTest}
+            onChange={(value) => setAnswers((prev) => ({ ...prev, listenTest: value }))}
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
 
-      {currentStep === "result" ? (
-        <StepResult
-          answers={answers}
-          result={result}
-          onContinueDiy={() => setShowQuotePlaceholder(false)}
-          onGetQuote={() => setShowQuotePlaceholder(true)}
-          onRestart={restart}
-          showQuotePlaceholder={showQuotePlaceholder}
-          onBack={goBack}
-          onNext={goNext}
-          canGoBack={canGoBack}
-          canGoNext={canGoNext}
-        />
-      ) : null}
+        {currentStep === "smart_health" ? (
+          <StepSmartHealth
+            value={answers.smart.smartHealth}
+            onChange={(value) =>
+              setAnswers((prev) => ({
+                ...prev,
+                smart: {
+                  ...prev.smart,
+                  smartHealth: value,
+                },
+              }))
+            }
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "result" ? (
+          <StepResult
+            answers={answers}
+            result={result}
+            onContinueDiy={() => setShowQuotePlaceholder(false)}
+            onGetQuote={() => setShowQuotePlaceholder(true)}
+            onRestart={restart}
+            showQuotePlaceholder={showQuotePlaceholder}
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }

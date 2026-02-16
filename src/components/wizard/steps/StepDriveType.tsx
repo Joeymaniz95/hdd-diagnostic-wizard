@@ -24,7 +24,6 @@ export default function StepDriveType({
     <StepLayout
       stepLabel="Step 3"
       title="What kind of drive do you have?"
-      subtitle="Choose the size or type that looks closest to your drive."
       onBack={onBack}
       onNext={onNext}
       canGoBack={canGoBack}

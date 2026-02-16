@@ -31,7 +31,6 @@ export default function StepResult({
     <StepLayout
       stepLabel="Result"
       title="Your recommended next step"
-      subtitle={`Path: ${result.route} | Risk level: ${result.risk}`}
       onBack={onBack}
       onNext={onNext}
       canGoBack={canGoBack}

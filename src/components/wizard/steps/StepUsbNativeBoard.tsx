@@ -24,7 +24,6 @@ export default function StepUsbNativeBoard({
     <StepLayout
       stepLabel="Step 4"
       title="Does the drive board have USB built in?"
-      subtitle="Look for a USB connector soldered directly onto the drive board."
       onBack={onBack}
       onNext={onNext}
       canGoBack={canGoBack}
