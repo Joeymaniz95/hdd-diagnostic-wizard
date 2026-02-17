@@ -18,25 +18,25 @@ const options: Array<{
     value: "good",
     label: "Good",
     subtext: "Drive reports healthy SMART status.",
-    border: "#2563EB",
-    background: "#EFF6FF",
-    text: "#1D4ED8",
+    border: "#4ade80",
+    background: "rgba(74,222,128,0.10)",
+    text: "#86efac",
   },
   {
     value: "caution",
     label: "Caution",
     subtext: "Early warning signs detected.",
-    border: "#F59E0B",
-    background: "#FFFBEB",
-    text: "#B45309",
+    border: "#fbbf24",
+    background: "rgba(251,191,36,0.10)",
+    text: "#fcd34d",
   },
   {
     value: "bad",
     label: "Bad",
     subtext: "Drive is actively failing.",
-    border: "#DC2626",
-    background: "#FEF2F2",
-    text: "#B91C1C",
+    border: "#f87171",
+    background: "rgba(248,113,113,0.12)",
+    text: "#fca5a5",
   },
 ];
 
@@ -52,9 +52,9 @@ export default function StepSmartHealth({
   const nextLabel = showBadWarning ? "Continue Anyway" : "Next";
 
   function selectedGlow(status: SmartHealth): string {
-    if (status === "good") return "0 0 0 3px rgba(37,99,235,0.2), 0 6px 14px rgba(15,23,42,0.08)";
-    if (status === "caution") return "0 0 0 3px rgba(245,158,11,0.2), 0 6px 14px rgba(15,23,42,0.08)";
-    return "0 0 0 3px rgba(220,38,38,0.2), 0 6px 14px rgba(15,23,42,0.08)";
+    if (status === "good") return "0 0 0 2px rgba(74,222,128,0.25), 0 6px 14px rgba(0,0,0,0.35)";
+    if (status === "caution") return "0 0 0 2px rgba(251,191,36,0.25), 0 6px 14px rgba(0,0,0,0.35)";
+    return "0 0 0 2px rgba(248,113,113,0.25), 0 6px 14px rgba(0,0,0,0.35)";
   }
 
   return (
@@ -67,23 +67,23 @@ export default function StepSmartHealth({
       canGoNext={canGoNext}
       nextLabel={nextLabel}
     >
-      <ul className="list-disc space-y-1 pl-5 text-[15px] text-[#3c4043] lg:text-[14px]">
+      <ul className="list-disc space-y-1 pl-5 text-[15px] text-[#e8eaed] lg:text-[14px]">
         <li>Download and install CrystalDiskInfo (Windows).</li>
         <li>Open CrystalDiskInfo.</li>
         <li>Look for your problem drive in the list.</li>
         <li>Then choose what you see below.</li>
       </ul>
 
-      <div className="mt-3 rounded-2xl border border-[#dadce0] bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
+      <div className="mt-3 rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#1a1d27] p-4 shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
         <a
           href="https://crystalmark.info/en/software/crystaldiskinfo/"
           target="_blank"
           rel="noreferrer noopener"
-          className="inline-flex rounded-[24px] bg-[#1a73e8] px-6 py-3 text-sm font-medium text-white shadow-[0_1px_2px_rgba(26,115,232,0.25)] transition-all duration-200 hover:-translate-y-px hover:bg-[#1557b0] hover:shadow-[0_6px_14px_rgba(26,115,232,0.3)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1a73e8] focus-visible:outline-offset-2"
+          className="inline-flex rounded-[24px] bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] px-6 py-3 text-sm font-medium text-white shadow-[0_4px_15px_rgba(99,102,241,0.4)] transition-all duration-200 hover:brightness-110 hover:shadow-[0_8px_24px_rgba(99,102,241,0.5)]"
         >
           Download CrystalDiskInfo
         </a>
-        <p className="mt-2 text-sm text-[#5f6368]">Windows only.</p>
+        <p className="mt-2 text-sm text-[#9aa0ac]">Windows only.</p>
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-3">
@@ -98,10 +98,7 @@ export default function StepSmartHealth({
               backgroundColor: option.background,
               color: option.text,
               borderWidth: value === option.value ? "2px" : "1px",
-              boxShadow:
-                value === option.value
-                  ? selectedGlow(option.value)
-                  : "0 1px 3px rgba(0,0,0,0.10)",
+              boxShadow: value === option.value ? selectedGlow(option.value) : "0 4px 24px rgba(0,0,0,0.28)",
             }}
           >
             <div className="flex items-center gap-2">
@@ -112,13 +109,13 @@ export default function StepSmartHealth({
               />
               <p className="text-lg font-semibold">{option.label}</p>
             </div>
-            <p className="mt-2 text-sm text-[#5f6368]">{option.subtext}</p>
+            <p className="mt-2 text-sm text-[#9aa0ac]">{option.subtext}</p>
           </button>
         ))}
       </div>
 
       {showBadWarning ? (
-        <div className="mt-3 rounded-xl border border-[#FCA5A5] bg-[#FEF2F2] p-4 text-[#B91C1C]">
+        <div className="mt-3 rounded-xl border border-[rgba(248,113,113,0.35)] bg-[rgba(248,113,113,0.12)] p-4 text-[#fca5a5]">
           <p className="font-semibold">High risk of failure</p>
           <p className="mt-2">
             If CrystalDiskInfo shows &lsquo;Bad&rsquo;, the drive is actively failing. Continuing DIY
@@ -128,7 +125,7 @@ export default function StepSmartHealth({
           <div className="mt-4">
             <button
               type="button"
-              className="rounded-xl border border-[#dadce0] bg-white px-4 py-2 text-sm font-medium text-[#3c4043] transition hover:bg-[#f8f9fa]"
+              className="rounded-xl border border-[rgba(255,255,255,0.15)] bg-transparent px-4 py-2 text-sm font-medium text-[#e8eaed] transition hover:border-[#6366f1]"
             >
               Get Professional Recovery Quote
             </button>
