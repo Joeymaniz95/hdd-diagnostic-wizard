@@ -1,64 +1,162 @@
-<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Head arm hovering over platter</title>
-  <desc id="desc">Side-view style illustration showing read head hovering above spinning platter with a tiny air gap.</desc>
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hd-title hd-desc">
+  <title id="hd-title">Read/write head hovering above platter</title>
+  <desc id="hd-desc">Side-view illustration showing a dark metallic read head floating just above a spinning platter with a visible air cushion gap.</desc>
+
+  <style>
+    @keyframes head-shadow-breath {
+      0%   { opacity: 0.42; }
+      50%  { opacity: 0.10; }
+      100% { opacity: 0.42; }
+    }
+    .headShadowBreath {
+      animation: head-shadow-breath 3s ease-in-out infinite;
+      will-change: opacity;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .headShadowBreath { animation: none; opacity: 0.25; }
+    }
+  </style>
+
   <defs>
-    <linearGradient id="bg" x1="80" y1="44" x2="560" y2="376" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#F2F4F7"/>
+    <!-- Dark panel background -->
+    <radialGradient id="hd-bg" cx="50%" cy="50%" r="70%" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) scale(300 200)">
+      <stop stop-color="#181b2c"/>
+      <stop offset="1" stop-color="#0c0e18"/>
+    </radialGradient>
+
+    <!-- Platter top face — dark metallic, lighter center simulates ambient light -->
+    <linearGradient id="hd-plt-top" x1="150" y1="252" x2="500" y2="252" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#181c30"/>
+      <stop offset="0.25" stop-color="#232843"/>
+      <stop offset="0.5" stop-color="#2a3050"/>
+      <stop offset="0.75" stop-color="#232843"/>
+      <stop offset="1" stop-color="#181c30"/>
     </linearGradient>
-    <linearGradient id="platterTop" x1="150" y1="250" x2="500" y2="250" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#DEE5ED"/>
-      <stop offset="0.5" stop-color="#F9FBFD"/>
-      <stop offset="1" stop-color="#CFD8E1"/>
+
+    <!-- Platter edge/side — darker underside -->
+    <linearGradient id="hd-plt-edge" x1="150" y1="265" x2="500" y2="265" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0e1020"/>
+      <stop offset="0.5" stop-color="#141728"/>
+      <stop offset="1" stop-color="#0e1020"/>
     </linearGradient>
-    <linearGradient id="platterEdge" x1="150" y1="250" x2="500" y2="250" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#AAB5C1"/>
-      <stop offset="1" stop-color="#8E9AA8"/>
+
+    <!-- Platter surface sheen — subtle highlight on spinning disk top -->
+    <linearGradient id="hd-plt-sheen" x1="200" y1="248" x2="450" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(255,255,255,0)"/>
+      <stop offset="0.35" stop-color="rgba(255,255,255,0.05)"/>
+      <stop offset="0.65" stop-color="rgba(255,255,255,0.02)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0)"/>
     </linearGradient>
-    <linearGradient id="arm" x1="198" y1="130" x2="440" y2="188" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#AEB8C4"/>
-      <stop offset="1" stop-color="#7D8A98"/>
+
+    <!-- Actuator arm — dark gunmetal -->
+    <linearGradient id="hd-arm" x1="190" y1="130" x2="395" y2="215" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#404868"/>
+      <stop offset="0.5" stop-color="#2e3450"/>
+      <stop offset="1" stop-color="#1e2238"/>
     </linearGradient>
-    <filter id="diskShadow" x="108" y="221" width="434" height="108" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="16"/>
-      <feGaussianBlur stdDeviation="12"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.13 0 0 0 0 0.17 0 0 0 0 0.22 0 0 0 0.18 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+
+    <!-- Arm edge highlight -->
+    <linearGradient id="hd-arm-hi" x1="190" y1="124" x2="395" y2="209" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(255,255,255,0.12)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+
+    <!-- Head body — dark slate with slight blue metallic -->
+    <linearGradient id="hd-head-body" x1="345" y1="196" x2="400" y2="226" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2c3358"/>
+      <stop offset="1" stop-color="#1c2040"/>
+    </linearGradient>
+
+    <!-- Head top highlight -->
+    <linearGradient id="hd-head-hi" x1="365" y1="200" x2="392" y2="210" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(180,192,255,0.35)"/>
+      <stop offset="1" stop-color="rgba(120,140,220,0.10)"/>
+    </linearGradient>
+
+    <!-- Air-cushion shadow below head -->
+    <radialGradient id="hd-shadow" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(364 238) scale(52 10)">
+      <stop stop-color="#6366f1" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#6366f1" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Pivot hub gradient -->
+    <radialGradient id="hd-pivot" cx="35%" cy="30%" r="65%" gradientUnits="objectBoundingBox">
+      <stop stop-color="#3a4060"/>
+      <stop offset="0.6" stop-color="#252942"/>
+      <stop offset="1" stop-color="#1a1d34"/>
+    </radialGradient>
+
+    <!-- Disk drop shadow -->
+    <filter id="hd-disk-shadow" x="100" y="210" width="450" height="130" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="bg"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="alpha"/>
+      <feOffset dy="14"/>
+      <feGaussianBlur stdDeviation="14"/>
+      <feComposite in2="alpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.08 0 0 0 0 0.10 0 0 0 0 0.25 0 0 0 0.45 0"/>
+      <feBlend mode="normal" in2="bg" result="shadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="shadow" result="out"/>
     </filter>
-    <filter id="headShadow" x="286" y="187" width="110" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feGaussianBlur stdDeviation="5"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.11 0 0 0 0 0.15 0 0 0 0 0.2 0 0 0 0.24 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+
+    <!-- Head assembly soft glow -->
+    <filter id="hd-head-glow" x="-30%" y="-60%" width="160%" height="220%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#6366f1" flood-opacity="0.18" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feBlend in="SourceGraphic" in2="glow" mode="normal"/>
     </filter>
   </defs>
 
-  <rect x="40" y="30" width="560" height="360" rx="26" fill="url(#bg)"/>
+  <!-- Background panel -->
+  <rect x="40" y="30" width="560" height="360" rx="26" fill="url(#hd-bg)"/>
 
-  <g filter="url(#diskShadow)">
-    <ellipse cx="325" cy="252" rx="175" ry="40" fill="url(#platterTop)"/>
-    <ellipse cx="325" cy="264" rx="175" ry="40" fill="url(#platterEdge)"/>
-    <ellipse cx="325" cy="248" rx="162" ry="32" stroke="#B6C1CD" stroke-width="1.2" opacity="0.55"/>
+  <!-- Subtle ambient glow behind platter area -->
+  <ellipse cx="325" cy="265" rx="185" ry="45" fill="rgba(99,102,241,0.04)"/>
+
+  <!-- Platter disk with drop shadow -->
+  <g filter="url(#hd-disk-shadow)">
+    <ellipse cx="325" cy="252" rx="175" ry="40" fill="url(#hd-plt-top)"/>
+    <ellipse cx="325" cy="264" rx="175" ry="40" fill="url(#hd-plt-edge)"/>
   </g>
 
-  <circle cx="325" cy="248" r="13" fill="#EEF2F6" stroke="#B6C1CD"/>
+  <!-- Top face surface sheen overlay -->
+  <ellipse cx="325" cy="250" rx="175" ry="38" fill="url(#hd-plt-sheen)"/>
 
-  <path d="M188 132C234 123 271 134 305 157L390 214" stroke="url(#arm)" stroke-width="16" stroke-linecap="round"/>
-  <circle cx="186" cy="133" r="24" fill="#D1D8E0"/>
-  <circle cx="186" cy="133" r="11" fill="#A6B2BF"/>
+  <!-- Rim lines -->
+  <ellipse cx="325" cy="252" rx="175" ry="40" stroke="rgba(255,255,255,0.07)" stroke-width="0.8" fill="none"/>
+  <ellipse cx="325" cy="264" rx="175" ry="40" stroke="rgba(255,255,255,0.04)" stroke-width="0.8" fill="none"/>
 
-  <g filter="url(#headShadow)">
-    <ellipse cx="340" cy="205" rx="37" ry="9" fill="#8B99A8" fill-opacity="0.34"/>
+  <!-- Spindle hole -->
+  <ellipse cx="325" cy="252" rx="13" ry="6" fill="#1a1e34"/>
+  <ellipse cx="325" cy="252" rx="13" ry="6" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" fill="none"/>
+
+  <!-- Actuator arm body -->
+  <path d="M190 134 C236 124 274 136 308 158 L394 214" stroke="url(#hd-arm)" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <!-- Arm top-edge highlight -->
+  <path d="M190 129 C236 119 274 131 308 153 L394 209" stroke="url(#hd-arm-hi)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.55"/>
+
+  <!-- Pivot hub -->
+  <circle cx="188" cy="134" r="24" fill="url(#hd-pivot)"/>
+  <circle cx="188" cy="134" r="24" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" fill="none"/>
+  <circle cx="188" cy="134" r="11" fill="#1e2238"/>
+  <circle cx="183" cy="129" r="4" fill="rgba(255,255,255,0.09)"/>
+
+  <!-- Air-cushion shadow — between head and platter, breathes with hover animation -->
+  <ellipse cx="364" cy="238" rx="52" ry="10" fill="url(#hd-shadow)" class="headShadowBreath"/>
+
+  <!-- Read/write head assembly with soft glow -->
+  <g filter="url(#hd-head-glow)">
+    <!-- Head body -->
+    <path d="M374 197 L401 214 L372 226 L345 209 Z" fill="url(#hd-head-body)"/>
+    <!-- Head top highlight surface -->
+    <path d="M380 202 L394 210 L378 216 L365 208 Z" fill="url(#hd-head-hi)"/>
+    <!-- Leading edge read element -->
+    <line x1="345" y1="209" x2="372" y2="226" stroke="rgba(180,200,255,0.22)" stroke-width="1.2"/>
+    <!-- Trailing edge subtle line -->
+    <line x1="374" y1="197" x2="401" y2="214" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
   </g>
 
-  <path d="M372 196L399 213L371 225L345 208L372 196Z" fill="#A0AEBB"/>
-  <path d="M378 201L391 208L377 214L365 208L378 201Z" fill="#DDE4EB"/>
-
-  <line x1="323" y1="216" x2="323" y2="226" stroke="#6E7A88" stroke-width="1.6" stroke-dasharray="3 3" opacity="0.6"/>
+  <!-- Air gap indicator — indigo dashed line -->
+  <line x1="325" y1="228" x2="325" y2="242" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2.5" opacity="0.45"/>
 </svg>

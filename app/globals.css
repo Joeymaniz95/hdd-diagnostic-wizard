@@ -174,7 +174,7 @@ button {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-3px);
+    transform: translateY(-1.5px);
   }
   100% {
     transform: translateY(0px);
@@ -218,6 +218,8 @@ button {
   animation: head-hover-slow 3s ease-in-out infinite;
   will-change: transform;
 }
+
+/* Shadow breath — syncs with headHoverSlow for depth illusion (defined inside SVG <style>) */
 
 .wave1 {
   animation: wavePulse 2.5s ease-in-out infinite;
@@ -299,6 +301,7 @@ button {
   .step-enter,
   .platterSpinSlow,
   .headHoverSlow,
+  .headShadowBreath,
   .wave1,
   .wave2,
   .wave3,
