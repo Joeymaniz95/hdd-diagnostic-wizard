@@ -6,7 +6,6 @@ type StepResultProps = StepNavigationProps & {
   result: WizardResult;
   onContinueDiy: () => void;
   onGetQuote: () => void;
-  onRestart: () => void;
   showQuotePlaceholder: boolean;
 };
 
@@ -15,7 +14,6 @@ export default function StepResult({
   result,
   onContinueDiy,
   onGetQuote,
-  onRestart,
   showQuotePlaceholder,
   onBack,
   onNext,
@@ -140,13 +138,6 @@ export default function StepResult({
         </ul>
       </div>
 
-      <button
-        type="button"
-        onClick={onRestart}
-        className="mt-6 w-full rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] px-5 py-3 font-medium text-white transition hover:brightness-110"
-      >
-        Restart
-      </button>
     </StepLayout>
   );
 }

@@ -2,7 +2,6 @@ import { useState } from "react";
 import StepLayout, { type StepNavigationProps } from "@/src/components/wizard/StepLayout";
 
 type StepFinishProps = StepNavigationProps & {
-  onRestart: () => void;
   onGetQuote: () => void;
 };
 
@@ -11,7 +10,6 @@ export default function StepFinish({
   onNext,
   canGoBack,
   canGoNext,
-  onRestart,
   onGetQuote,
 }: StepFinishProps) {
   const [outcome, setOutcome] = useState<"success" | "need_help" | null>(null);
@@ -107,13 +105,6 @@ export default function StepFinish({
             </ul>
           </div>
 
-          <button
-            type="button"
-            onClick={onRestart}
-            className="w-full rounded-xl border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-3 text-sm font-medium text-[#9aa0ac] transition hover:border-[#6366f1] hover:text-white"
-          >
-            Start over
-          </button>
         </div>
       ) : null}
 
@@ -195,14 +186,6 @@ export default function StepFinish({
             className="w-full rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] px-6 py-4 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(99,102,241,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_8px_28px_rgba(99,102,241,0.55)] active:scale-[0.99]"
           >
             Get a Professional Recovery Quote →
-          </button>
-
-          <button
-            type="button"
-            onClick={onRestart}
-            className="w-full rounded-xl border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-3 text-sm font-medium text-[#9aa0ac] transition hover:border-[#6366f1] hover:text-white"
-          >
-            Start over
           </button>
         </div>
       ) : null}

@@ -25,6 +25,29 @@ import StepClicking from "@/src/components/wizard/steps/StepClicking";
 import type { WizardAnswers } from "@/src/types/wizard";
 import { evaluateWizard } from "@/src/utils/rulesEngine";
 
+const STEP_LABELS: Record<string, string> = {
+  how_drive_works: "How drives work",
+  external_enclosure: "External enclosure",
+  pcb_interface: "PCB interface",
+  connection_guidance: "Connection guidance",
+  listen_test: "Listen test",
+  smart_health: "Drive health",
+  result: "Assessment",
+  prerequisites: "Prerequisites",
+  create_usb: "Create USB",
+  boot_usb: "Boot USB",
+  identify_drives: "Identify drives",
+  clone_drive: "Clone drive",
+  post_clone: "After cloning",
+  scan_clone: "Scan clone",
+  recover_files: "Recover files",
+  finish: "Finish",
+  quote_form: "Get quote",
+  spins_down_stop: "Recovery required",
+  not_spinning_stop: "Recovery required",
+  clicking_stop: "Recovery required",
+};
+
 type StepId =
   | "how_drive_works"
   | "external_enclosure"
@@ -105,15 +128,20 @@ export default function Wizard() {
 
   const boundedStepIndex = Math.min(currentStepIndex, steps.length - 1);
   const currentStep = steps[boundedStepIndex] ?? steps[0];
-  const isLastStep = boundedStepIndex === steps.length - 1;
   const result = useMemo(() => evaluateWizard(answers), [answers]);
 
   const canGoBack = boundedStepIndex > 0;
+  const isHardStop =
+    currentStep === "not_spinning_stop" ||
+    currentStep === "spins_down_stop" ||
+    currentStep === "clicking_stop" ||
+    (currentStep === "smart_health" && answers.smart.smartHealth === "bad");
+  const stepLabels = steps.map((id) => STEP_LABELS[id] ?? id);
 
   const canGoNext = useMemo(() => {
     if (currentStep === "external_enclosure") return answers.externalEnclosure !== null;
     if (currentStep === "listen_test") return answers.listenTest !== null;
-    if (currentStep === "smart_health") return answers.smart.smartHealth !== null;
+    if (currentStep === "smart_health") return answers.smart.smartHealth !== null && answers.smart.smartHealth !== "bad";
     if (
       currentStep === "finish" ||
       currentStep === "quote_form" ||
@@ -134,6 +162,7 @@ export default function Wizard() {
   }
 
   function goNext() {
+    if (!canGoNext) return;
     scrollToTop();
     setCurrentStepIndex((previous) => {
       const safePrevious = Math.min(previous, steps.length - 1);
@@ -161,10 +190,32 @@ export default function Wizard() {
     setCurrentStepIndex(steps.length - 1);
   }
 
+  function handleStepClick(targetIndex: number) {
+    if (targetIndex === boundedStepIndex) return;
+    if (targetIndex < boundedStepIndex) {
+      scrollToTop();
+      setCurrentStepIndex(targetIndex);
+      return;
+    }
+    // Forward: only one step at a time, canGoNext must be true, no hard stop
+    if (targetIndex === boundedStepIndex + 1 && canGoNext && !isHardStop) {
+      scrollToTop();
+      setCurrentStepIndex(targetIndex);
+    }
+  }
+
   return (
     <div className="w-full">
       <div className="mb-6 pb-4 sm:mb-7">
-        <ProgressBar currentStep={boundedStepIndex + 1} totalSteps={steps.length} onReset={restart} showRestart={isLastStep} />
+        <ProgressBar
+          currentStep={boundedStepIndex + 1}
+          totalSteps={steps.length}
+          onReset={restart}
+          stepLabels={stepLabels}
+          onStepClick={handleStepClick}
+          isHardStop={isHardStop}
+          canGoNext={canGoNext}
+        />
       </div>
 
       <div key={currentStep} className="step-enter">
@@ -229,6 +280,7 @@ export default function Wizard() {
                 },
               }))
             }
+            onGetQuote={goToQuote}
             onBack={goBack}
             onNext={goNext}
             canGoBack={canGoBack}
@@ -242,7 +294,6 @@ export default function Wizard() {
             result={result}
             onContinueDiy={() => setShowQuotePlaceholder(false)}
             onGetQuote={goToQuote}
-            onRestart={restart}
             showQuotePlaceholder={false}
             onBack={goBack}
             onNext={goNext}
@@ -329,7 +380,6 @@ export default function Wizard() {
             onNext={goNext}
             canGoBack={canGoBack}
             canGoNext={canGoNext}
-            onRestart={restart}
             onGetQuote={goToQuote}
           />
         ) : null}
@@ -370,7 +420,6 @@ export default function Wizard() {
             onNext={goNext}
             canGoBack={canGoBack}
             canGoNext={canGoNext}
-            onRestart={restart}
           />
         ) : null}
       </div>

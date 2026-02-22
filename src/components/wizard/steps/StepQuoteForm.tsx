@@ -3,9 +3,7 @@ import StepLayout, { type StepNavigationProps } from "@/src/components/wizard/St
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-type StepQuoteFormProps = StepNavigationProps & {
-  onRestart: () => void;
-};
+type StepQuoteFormProps = StepNavigationProps;
 
 type FormData = {
   fullName: string;
@@ -161,7 +159,6 @@ export default function StepQuoteForm({
   onNext,
   canGoBack,
   canGoNext,
-  onRestart,
 }: StepQuoteFormProps) {
   const [data, setData] = useState<FormData>(initialData);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -290,23 +287,14 @@ export default function StepQuoteForm({
             </p>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <a
-              href="https://mdrepairs.com/mail-in-repair/"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="flex items-center justify-center rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] px-5 py-3.5 text-center text-sm font-medium text-white shadow-[0_4px_15px_rgba(99,102,241,0.4)] transition-all duration-200 hover:brightness-110 hover:shadow-[0_8px_24px_rgba(99,102,241,0.5)]"
-            >
-              View Mail-In Instructions
-            </a>
-            <button
-              type="button"
-              onClick={onRestart}
-              className="flex items-center justify-center rounded-xl border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-3.5 text-sm font-medium text-[#9aa0ac] transition hover:border-[#6366f1] hover:text-white"
-            >
-              Back to Tool
-            </button>
-          </div>
+          <a
+            href="https://mdrepairs.com/mail-in-repair/"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="flex items-center justify-center rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] px-5 py-3.5 text-center text-sm font-medium text-white shadow-[0_4px_15px_rgba(99,102,241,0.4)] transition-all duration-200 hover:brightness-110 hover:shadow-[0_8px_24px_rgba(99,102,241,0.5)]"
+          >
+            View Mail-In Instructions
+          </a>
         </div>
       </StepLayout>
     );
