@@ -35,7 +35,7 @@ export default function StepResult({
       onNext={onNext}
       canGoBack={canGoBack}
       canGoNext={canGoNext}
-      showNext={false}
+      nextLabel="Continue to Recovery Guide →"
     >
       <p className="text-[#e8eaed]">
         You are not expected to know all recovery terms. We will keep this practical and simple.

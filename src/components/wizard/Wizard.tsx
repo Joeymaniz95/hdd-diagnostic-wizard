@@ -9,6 +9,19 @@ import StepListenTest from "@/src/components/wizard/steps/StepListenTest";
 import StepPcbInterface from "@/src/components/wizard/steps/StepPcbInterface";
 import StepResult from "@/src/components/wizard/steps/StepResult";
 import StepSmartHealth from "@/src/components/wizard/steps/StepSmartHealth";
+import StepPrerequisites from "@/src/components/wizard/steps/StepPrerequisites";
+import StepCreateUsb from "@/src/components/wizard/steps/StepCreateUsb";
+import StepBootUsb from "@/src/components/wizard/steps/StepBootUsb";
+import StepIdentifyDrives from "@/src/components/wizard/steps/StepIdentifyDrives";
+import StepCloneDrive from "@/src/components/wizard/steps/StepCloneDrive";
+import StepPostClone from "@/src/components/wizard/steps/StepPostClone";
+import StepScanClone from "@/src/components/wizard/steps/StepScanClone";
+import StepRecoverFiles from "@/src/components/wizard/steps/StepRecoverFiles";
+import StepFinish from "@/src/components/wizard/steps/StepFinish";
+import StepQuoteForm from "@/src/components/wizard/steps/StepQuoteForm";
+import StepSpinsDown from "@/src/components/wizard/steps/StepSpinsDown";
+import StepNotSpinning from "@/src/components/wizard/steps/StepNotSpinning";
+import StepClicking from "@/src/components/wizard/steps/StepClicking";
 import type { WizardAnswers } from "@/src/types/wizard";
 import { evaluateWizard } from "@/src/utils/rulesEngine";
 
@@ -19,7 +32,20 @@ type StepId =
   | "connection_guidance"
   | "listen_test"
   | "smart_health"
-  | "result";
+  | "result"
+  | "prerequisites"
+  | "create_usb"
+  | "boot_usb"
+  | "identify_drives"
+  | "clone_drive"
+  | "post_clone"
+  | "scan_clone"
+  | "recover_files"
+  | "finish"
+  | "quote_form"
+  | "spins_down_stop"
+  | "not_spinning_stop"
+  | "clicking_stop";
 
 const initialAnswers: WizardAnswers = {
   externalEnclosure: null,
@@ -52,7 +78,28 @@ export default function Wizard() {
       ordered.push("smart_health");
     }
 
-    ordered.push("result");
+    if (answers.listenTest === "not_spinning") {
+      ordered.push("not_spinning_stop", "quote_form");
+    } else if (answers.listenTest === "spins_then_spins_down") {
+      ordered.push("spins_down_stop", "quote_form");
+    } else if (answers.listenTest === "clicking") {
+      ordered.push("clicking_stop", "quote_form");
+    } else {
+      ordered.push(
+        "result",
+        "prerequisites",
+        "create_usb",
+        "boot_usb",
+        "identify_drives",
+        "clone_drive",
+        "post_clone",
+        "scan_clone",
+        "recover_files",
+        "finish",
+        "quote_form",
+      );
+    }
+
     return ordered;
   }, [answers.externalEnclosure, answers.listenTest]);
 
@@ -66,7 +113,13 @@ export default function Wizard() {
     if (currentStep === "external_enclosure") return answers.externalEnclosure !== null;
     if (currentStep === "listen_test") return answers.listenTest !== null;
     if (currentStep === "smart_health") return answers.smart.smartHealth !== null;
-    if (currentStep === "result") return false;
+    if (
+      currentStep === "finish" ||
+      currentStep === "quote_form" ||
+      currentStep === "spins_down_stop" ||
+      currentStep === "not_spinning_stop" ||
+      currentStep === "clicking_stop"
+    ) return false;
     return true;
   }, [answers, currentStep]);
 
@@ -99,6 +152,12 @@ export default function Wizard() {
     setAnswers(initialAnswers);
     setShowQuotePlaceholder(false);
     setCurrentStepIndex(0);
+  }
+
+  function goToQuote() {
+    scrollToTop();
+    // quote_form is always the last step in the array
+    setCurrentStepIndex(steps.length - 1);
   }
 
   return (
@@ -181,13 +240,136 @@ export default function Wizard() {
             answers={answers}
             result={result}
             onContinueDiy={() => setShowQuotePlaceholder(false)}
-            onGetQuote={() => setShowQuotePlaceholder(true)}
+            onGetQuote={goToQuote}
             onRestart={restart}
-            showQuotePlaceholder={showQuotePlaceholder}
+            showQuotePlaceholder={false}
             onBack={goBack}
             onNext={goNext}
             canGoBack={canGoBack}
             canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "prerequisites" ? (
+          <StepPrerequisites
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "create_usb" ? (
+          <StepCreateUsb
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "boot_usb" ? (
+          <StepBootUsb
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "identify_drives" ? (
+          <StepIdentifyDrives
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "clone_drive" ? (
+          <StepCloneDrive
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "post_clone" ? (
+          <StepPostClone
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "scan_clone" ? (
+          <StepScanClone
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "recover_files" ? (
+          <StepRecoverFiles
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+          />
+        ) : null}
+
+        {currentStep === "finish" ? (
+          <StepFinish
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+            onRestart={restart}
+            onGetQuote={goToQuote}
+          />
+        ) : null}
+
+        {currentStep === "not_spinning_stop" ? (
+          <StepNotSpinning
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+            onGetQuote={goToQuote}
+          />
+        ) : null}
+
+        {currentStep === "clicking_stop" ? (
+          <StepClicking
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+            onGetQuote={goToQuote}
+          />
+        ) : null}
+
+        {currentStep === "spins_down_stop" ? (
+          <StepSpinsDown
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+            onGetQuote={goToQuote}
+          />
+        ) : null}
+
+        {currentStep === "quote_form" ? (
+          <StepQuoteForm
+            onBack={goBack}
+            onNext={goNext}
+            canGoBack={canGoBack}
+            canGoNext={canGoNext}
+            onRestart={restart}
           />
         ) : null}
       </div>
