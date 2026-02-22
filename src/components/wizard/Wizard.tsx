@@ -105,6 +105,7 @@ export default function Wizard() {
 
   const boundedStepIndex = Math.min(currentStepIndex, steps.length - 1);
   const currentStep = steps[boundedStepIndex] ?? steps[0];
+  const isLastStep = boundedStepIndex === steps.length - 1;
   const result = useMemo(() => evaluateWizard(answers), [answers]);
 
   const canGoBack = boundedStepIndex > 0;
@@ -163,7 +164,7 @@ export default function Wizard() {
   return (
     <div className="w-full">
       <div className="mb-6 pb-4 sm:mb-7">
-        <ProgressBar currentStep={boundedStepIndex + 1} totalSteps={steps.length} onReset={restart} />
+        <ProgressBar currentStep={boundedStepIndex + 1} totalSteps={steps.length} onReset={restart} showRestart={isLastStep} />
       </div>
 
       <div key={currentStep} className="step-enter">
