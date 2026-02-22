@@ -12,8 +12,18 @@
       animation: head-shadow-breath 3s ease-in-out infinite;
       will-change: opacity;
     }
+    @keyframes head-float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-2px); }
+      100% { transform: translateY(0px); }
+    }
+    .headFloat {
+      animation: head-float 3s ease-in-out infinite;
+      will-change: transform;
+    }
     @media (prefers-reduced-motion: reduce) {
       .headShadowBreath { animation: none; opacity: 0.25; }
+      .headFloat { animation: none; }
     }
   </style>
 
@@ -131,32 +141,36 @@
   <ellipse cx="325" cy="252" rx="13" ry="6" fill="#1a1e34"/>
   <ellipse cx="325" cy="252" rx="13" ry="6" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" fill="none"/>
 
-  <!-- Actuator arm body -->
-  <path d="M190 134 C236 124 274 136 308 158 L394 214" stroke="url(#hd-arm)" stroke-width="16" stroke-linecap="round" fill="none"/>
-  <!-- Arm top-edge highlight -->
-  <path d="M190 129 C236 119 274 131 308 153 L394 209" stroke="url(#hd-arm-hi)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.55"/>
-
-  <!-- Pivot hub -->
-  <circle cx="188" cy="134" r="24" fill="url(#hd-pivot)"/>
-  <circle cx="188" cy="134" r="24" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" fill="none"/>
-  <circle cx="188" cy="134" r="11" fill="#1e2238"/>
-  <circle cx="183" cy="129" r="4" fill="rgba(255,255,255,0.09)"/>
-
-  <!-- Air-cushion shadow — between head and platter, breathes with hover animation -->
+  <!-- Air-cushion shadow — stays fixed, breathes independently via opacity -->
   <ellipse cx="364" cy="238" rx="52" ry="10" fill="url(#hd-shadow)" class="headShadowBreath"/>
 
-  <!-- Read/write head assembly with soft glow -->
-  <g filter="url(#hd-head-glow)">
-    <!-- Head body -->
-    <path d="M374 197 L401 214 L372 226 L345 209 Z" fill="url(#hd-head-body)"/>
-    <!-- Head top highlight surface -->
-    <path d="M380 202 L394 210 L378 216 L365 208 Z" fill="url(#hd-head-hi)"/>
-    <!-- Leading edge read element -->
-    <line x1="345" y1="209" x2="372" y2="226" stroke="rgba(180,200,255,0.22)" stroke-width="1.2"/>
-    <!-- Trailing edge subtle line -->
-    <line x1="374" y1="197" x2="401" y2="214" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
-  </g>
+  <!-- ── Floating group — arm, hub, head, and air gap rise together ── -->
+  <g class="headFloat">
+    <!-- Actuator arm body -->
+    <path d="M190 134 C236 124 274 136 308 158 L394 214" stroke="url(#hd-arm)" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <!-- Arm top-edge highlight -->
+    <path d="M190 129 C236 119 274 131 308 153 L394 209" stroke="url(#hd-arm-hi)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.55"/>
 
-  <!-- Air gap indicator — indigo dashed line -->
-  <line x1="325" y1="228" x2="325" y2="242" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2.5" opacity="0.45"/>
+    <!-- Pivot hub -->
+    <circle cx="188" cy="134" r="24" fill="url(#hd-pivot)"/>
+    <circle cx="188" cy="134" r="24" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" fill="none"/>
+    <circle cx="188" cy="134" r="11" fill="#1e2238"/>
+    <circle cx="183" cy="129" r="4" fill="rgba(255,255,255,0.09)"/>
+
+    <!-- Read/write head assembly with soft glow -->
+    <g filter="url(#hd-head-glow)">
+      <!-- Head body -->
+      <path d="M374 197 L401 214 L372 226 L345 209 Z" fill="url(#hd-head-body)"/>
+      <!-- Head top highlight surface -->
+      <path d="M380 202 L394 210 L378 216 L365 208 Z" fill="url(#hd-head-hi)"/>
+      <!-- Leading edge read element -->
+      <line x1="345" y1="209" x2="372" y2="226" stroke="rgba(180,200,255,0.22)" stroke-width="1.2"/>
+      <!-- Trailing edge subtle line -->
+      <line x1="374" y1="197" x2="401" y2="214" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+    </g>
+
+    <!-- Air gap indicator — indigo dashed line -->
+    <line x1="325" y1="228" x2="325" y2="242" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2.5" opacity="0.45"/>
+  </g>
+  <!-- ── End floating group ── -->
 </svg>

@@ -163,7 +163,7 @@ export default function Wizard() {
   return (
     <div className="w-full">
       <div className="mb-6 pb-4 sm:mb-7">
-        <ProgressBar currentStep={boundedStepIndex + 1} totalSteps={steps.length} />
+        <ProgressBar currentStep={boundedStepIndex + 1} totalSteps={steps.length} onReset={restart} />
       </div>
 
       <div key={currentStep} className="step-enter">

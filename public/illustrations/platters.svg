@@ -8,8 +8,7 @@
       to   { transform: rotate(360deg); }
     }
     .platterSpinSlow {
-      transform-box: fill-box;
-      transform-origin: center center;
+      transform-origin: 320px 210px;
       animation: platter-rotate-slow 20s linear infinite;
       will-change: transform;
     }

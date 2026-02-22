@@ -12,6 +12,7 @@ const options: Array<{
   subtext: string;
   border: string;
   background: string;
+  backgroundSelected: string;
   text: string;
 }> = [
   {
@@ -19,7 +20,8 @@ const options: Array<{
     label: "Good",
     subtext: "Drive reports healthy SMART status.",
     border: "#4ade80",
-    background: "rgba(74,222,128,0.10)",
+    background: "rgba(74,222,128,0.08)",
+    backgroundSelected: "rgba(74,222,128,0.20)",
     text: "#86efac",
   },
   {
@@ -27,7 +29,8 @@ const options: Array<{
     label: "Caution",
     subtext: "Early warning signs detected.",
     border: "#fbbf24",
-    background: "rgba(251,191,36,0.10)",
+    background: "rgba(251,191,36,0.08)",
+    backgroundSelected: "rgba(251,191,36,0.18)",
     text: "#fcd34d",
   },
   {
@@ -35,10 +38,19 @@ const options: Array<{
     label: "Bad",
     subtext: "Drive is actively failing.",
     border: "#f87171",
-    background: "rgba(248,113,113,0.12)",
+    background: "rgba(248,113,113,0.08)",
+    backgroundSelected: "rgba(248,113,113,0.22)",
     text: "#fca5a5",
   },
 ];
+
+function selectedGlow(status: SmartHealth): string {
+  if (status === "good")
+    return "0 0 0 2px rgba(74,222,128,0.55), 0 0 20px rgba(74,222,128,0.22), 0 6px 20px rgba(0,0,0,0.4)";
+  if (status === "caution")
+    return "0 0 0 2px rgba(251,191,36,0.55), 0 0 20px rgba(251,191,36,0.22), 0 6px 20px rgba(0,0,0,0.4)";
+  return "0 0 0 2px rgba(248,113,113,0.55), 0 0 20px rgba(248,113,113,0.22), 0 6px 20px rgba(0,0,0,0.4)";
+}
 
 export default function StepSmartHealth({
   value,
@@ -50,12 +62,7 @@ export default function StepSmartHealth({
 }: StepSmartHealthProps) {
   const showBadWarning = value === "bad";
   const nextLabel = showBadWarning ? "Continue Anyway" : "Next";
-
-  function selectedGlow(status: SmartHealth): string {
-    if (status === "good") return "0 0 0 2px rgba(74,222,128,0.25), 0 6px 14px rgba(0,0,0,0.35)";
-    if (status === "caution") return "0 0 0 2px rgba(251,191,36,0.25), 0 6px 14px rgba(0,0,0,0.35)";
-    return "0 0 0 2px rgba(248,113,113,0.25), 0 6px 14px rgba(0,0,0,0.35)";
-  }
+  const hasSelection = value !== null;
 
   return (
     <StepLayout
@@ -87,31 +94,64 @@ export default function StepSmartHealth({
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-3">
-        {options.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            onClick={() => onChange(option.value)}
-            className="rounded-2xl border p-4 text-left transition-all duration-200 hover:-translate-y-0.5"
-            style={{
-              borderColor: option.border,
-              backgroundColor: option.background,
-              color: option.text,
-              borderWidth: value === option.value ? "2px" : "1px",
-              boxShadow: value === option.value ? selectedGlow(option.value) : "0 4px 24px rgba(0,0,0,0.28)",
-            }}
-          >
-            <div className="flex items-center gap-2">
-              <span
-                className="inline-block h-2.5 w-2.5 rounded-full"
-                style={{ backgroundColor: option.border }}
-                aria-hidden="true"
-              />
-              <p className="text-lg font-semibold">{option.label}</p>
-            </div>
-            <p className="mt-2 text-sm text-[#9aa0ac]">{option.subtext}</p>
-          </button>
-        ))}
+        {options.map((option) => {
+          const isSelected = value === option.value;
+          const isDimmed = hasSelection && !isSelected;
+
+          return (
+            <button
+              key={option.value}
+              type="button"
+              aria-pressed={isSelected}
+              onClick={() => onChange(option.value)}
+              className="relative rounded-2xl p-4 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7b8cde]"
+              style={{
+                borderStyle: "solid",
+                borderWidth: isSelected ? "2px" : "1.5px",
+                borderColor: isSelected ? option.border : `${option.border}60`,
+                backgroundColor: isSelected ? option.backgroundSelected : option.background,
+                color: option.text,
+                boxShadow: isSelected
+                  ? selectedGlow(option.value)
+                  : "0 4px 24px rgba(0,0,0,0.28)",
+                transform: isSelected ? "scale(1.02)" : "scale(1)",
+                opacity: isDimmed ? 0.45 : 1,
+                transition: "all 250ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+                textTransform: "none",
+                letterSpacing: "normal",
+              }}
+            >
+              {/* Check icon — appears in top-right corner when selected */}
+              {isSelected && (
+                <span
+                  className="absolute right-3 top-3 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                  aria-hidden="true"
+                  style={{ backgroundColor: option.border }}
+                >
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                    <path
+                      d="M1 4 L3.5 6.5 L9 1"
+                      stroke="white"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              )}
+
+              <div className="flex items-center gap-2">
+                <span
+                  className="inline-block h-2.5 w-2.5 rounded-full"
+                  style={{ backgroundColor: option.border }}
+                  aria-hidden="true"
+                />
+                <p className="text-lg font-semibold">{option.label}</p>
+              </div>
+              <p className="mt-2 text-sm text-[#9aa0ac]">{option.subtext}</p>
+            </button>
+          );
+        })}
       </div>
 
       {showBadWarning ? (
