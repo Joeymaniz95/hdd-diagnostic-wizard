@@ -4,7 +4,7 @@ const checklist = [
   {
     icon: "💻",
     label: "A working computer",
-    detail: "Any Windows or Mac machine to create the boot USB and run recovery software.",
+    detail: "A Windows computer to create the boot USB and run recovery software.",
   },
   {
     icon: "🔌",

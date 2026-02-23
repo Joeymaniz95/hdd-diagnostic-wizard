@@ -2,18 +2,15 @@ import StepLayout, { type StepNavigationProps } from "@/src/components/wizard/St
 
 const steps = [
   { n: 1, text: "Download the SystemRescue ISO file using the button below." },
-  {
-    n: 2,
-    text: "Download Rufus if you are on Windows, or balenaEtcher if you are on Mac — links below.",
-  },
+  { n: 2, text: "Download Rufus (Windows only) — link below." },
   { n: 3, text: "Insert your USB flash drive into the computer." },
   {
     n: 4,
-    text: 'Open Rufus or balenaEtcher. Click "Select" or "Flash from file" and choose the SystemRescue ISO you downloaded.',
+    text: 'Open Rufus. Click "Select" and choose the SystemRescue ISO you downloaded.',
   },
   {
     n: 5,
-    text: 'Click "Start" in Rufus or "Flash!" in balenaEtcher. If a warning appears about erasing the USB, click OK.',
+    text: 'Click "Start". If a warning appears about erasing the USB, click OK.',
   },
   {
     n: 6,
@@ -37,6 +34,17 @@ export default function StepCreateUsb({
       canGoBack={canGoBack}
       canGoNext={canGoNext}
     >
+      <div className="rounded-xl border border-[rgba(251,191,36,0.30)] bg-[rgba(251,191,36,0.07)] px-4 py-3">
+        <p className="text-sm font-semibold text-[#fcd34d]">Windows PC Required</p>
+        <p className="mt-1 text-sm text-[#fde68a]">
+          You must use a Windows computer to create the SystemRescue USB. Creating the USB on Mac is
+          not supported in this guide.
+        </p>
+        <p className="mt-2 text-sm text-[#fde68a]">
+          If you only have a Mac, we recommend borrowing a Windows PC for this step.
+        </p>
+      </div>
+
       <div className="space-y-3">
         {steps.map(({ n, text }) => (
           <div
@@ -69,33 +77,6 @@ export default function StepCreateUsb({
           Download Rufus (Windows only)
         </a>
       </div>
-
-      <p className="mt-2 text-center text-xs text-[#9aa0ac]">
-        On a Mac? See the balenaEtcher instructions below.
-      </p>
-
-      <details className="mt-4 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#1a1d27] p-4">
-        <summary className="cursor-pointer text-sm font-semibold text-[#7b8cde]">
-          Mac users — use balenaEtcher instead
-        </summary>
-        <div className="mt-3 space-y-2 text-sm text-[#9aa0ac]">
-          <p>
-            1. Download balenaEtcher from{" "}
-            <a
-              href="https://etcher.balena.io/"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-[#7b8cde] underline underline-offset-2 hover:text-white"
-            >
-              etcher.balena.io
-            </a>
-          </p>
-          <p>2. Open balenaEtcher.</p>
-          <p>3. Click &quot;Flash from file&quot; and select the SystemRescue ISO.</p>
-          <p>4. Click &quot;Select target&quot; and choose your USB flash drive.</p>
-          <p>5. Click &quot;Flash!&quot; and wait until it says finished.</p>
-        </div>
-      </details>
 
       <details className="mt-3 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#1a1d27] p-4">
         <summary className="cursor-pointer text-sm font-semibold text-[#7b8cde]">

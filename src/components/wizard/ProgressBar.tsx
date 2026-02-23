@@ -70,18 +70,18 @@ export default function ProgressBar({
           {stepLabels.map((label, i) => {
             const isPast = i < currentIdx;
             const isCurrent = i === currentIdx;
-            const isNextReachable = i === currentIdx + 1 && canGoNext && !isHardStop;
-            const isClickable = (isPast || isNextReachable) && !isCurrent;
+            const isFuture = i > currentIdx;
+            const isClickableFuture = isFuture && !isHardStop;
+            const isBlockedFuture = isFuture && isHardStop;
+            const isClickable = (isPast || isClickableFuture) && !isCurrent;
 
             let tooltipText: string;
             if (isCurrent) {
               tooltipText = `Step ${i + 1} — ${label} (current)`;
-            } else if (isHardStop && i > currentIdx) {
-              tooltipText = "Professional recovery required";
-            } else if (isClickable) {
-              tooltipText = `Go to Step ${i + 1} — ${label}`;
+            } else if (isBlockedFuture) {
+              tooltipText = "Professional recovery required — cannot continue.";
             } else {
-              tooltipText = `Step ${i + 1} — ${label}`;
+              tooltipText = `Go to Step ${i + 1} — ${label}`;
             }
 
             return (
@@ -95,11 +95,11 @@ export default function ProgressBar({
                 className={[
                   "h-2 flex-1 rounded-full transition-all duration-200",
                   isCurrent
-                    ? "bg-[#7b8cde] shadow-[0_0_6px_rgba(123,140,222,0.55)] cursor-default"
+                    ? "cursor-default bg-[#7b8cde] shadow-[0_0_6px_rgba(123,140,222,0.55)]"
                     : isPast
                     ? "cursor-pointer bg-[rgba(99,102,241,0.5)] hover:bg-[rgba(99,102,241,0.85)] hover:shadow-[0_0_6px_rgba(99,102,241,0.45)]"
-                    : isNextReachable
-                    ? "cursor-pointer bg-[rgba(99,102,241,0.2)] hover:bg-[rgba(99,102,241,0.4)]"
+                    : isClickableFuture
+                    ? "cursor-pointer bg-[rgba(99,102,241,0.18)] hover:bg-[rgba(99,102,241,0.42)] hover:shadow-[0_0_4px_rgba(99,102,241,0.3)]"
                     : "cursor-not-allowed bg-[rgba(255,255,255,0.07)]",
                 ].join(" ")}
                 style={{ textTransform: "none" }}

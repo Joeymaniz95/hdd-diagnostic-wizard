@@ -18,44 +18,44 @@
   </style>
 
   <defs>
-    <!-- Dark panel background -->
+    <!-- Panel background — slightly lighter than pure black for depth -->
     <radialGradient id="plt-bg" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) scale(290 200)">
-      <stop stop-color="#181b2c"/>
-      <stop offset="1" stop-color="#0c0e18"/>
+      <stop stop-color="#1e2133"/>
+      <stop offset="1" stop-color="#0f1120"/>
     </radialGradient>
 
-    <!-- Metallic platter surface — dark center, darker edge -->
+    <!-- Metallic platter surface — brighter center so disk stands out -->
     <radialGradient id="plt-main" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) scale(132)">
-      <stop stop-color="#2e3350"/>
-      <stop offset="0.38" stop-color="#1f2340"/>
-      <stop offset="0.72" stop-color="#171a30"/>
-      <stop offset="1" stop-color="#111426"/>
+      <stop stop-color="#3a3f62"/>
+      <stop offset="0.38" stop-color="#2c3152"/>
+      <stop offset="0.72" stop-color="#21253e"/>
+      <stop offset="1" stop-color="#181b30"/>
     </radialGradient>
 
-    <!-- Hub landing zone -->
+    <!-- Hub landing zone — brighter -->
     <radialGradient id="plt-inner" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) scale(46)">
-      <stop stop-color="#272c45"/>
-      <stop offset="1" stop-color="#1a1e38"/>
+      <stop stop-color="#303660"/>
+      <stop offset="1" stop-color="#22264a"/>
     </radialGradient>
 
-    <!-- Specular highlight sweep — top-right quadrant, rotates with platter -->
-    <radialGradient id="plt-glare-a" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(386 148) scale(48 26)">
-      <stop stop-color="#ffffff" stop-opacity="0.22"/>
-      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.07"/>
+    <!-- Specular highlight sweep — enlarged and ~2× brighter -->
+    <radialGradient id="plt-glare-a" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(386 148) scale(58 32)">
+      <stop stop-color="#ffffff" stop-opacity="0.42"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.18"/>
       <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Secondary faint blue glare opposite side — bottom-left -->
+    <!-- Secondary blue glare — brighter blue tint -->
     <radialGradient id="plt-glare-b" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(254 272) scale(32 18)">
-      <stop stop-color="#7b8cde" stop-opacity="0.14"/>
+      <stop stop-color="#7b8cde" stop-opacity="0.26"/>
       <stop offset="1" stop-color="#7b8cde" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Hub center chrome knob -->
+    <!-- Hub center chrome knob — brighter -->
     <radialGradient id="plt-hub" cx="35%" cy="30%" r="65%" gradientUnits="objectBoundingBox">
-      <stop stop-color="#3e4468"/>
-      <stop offset="0.6" stop-color="#252942"/>
-      <stop offset="1" stop-color="#1a1d34"/>
+      <stop stop-color="#52588a"/>
+      <stop offset="0.6" stop-color="#2f3460"/>
+      <stop offset="1" stop-color="#21264a"/>
     </radialGradient>
 
     <!-- Rotation arrow gradient — indigo -->
@@ -79,9 +79,12 @@
 
   <!-- Background panel -->
   <rect x="40" y="30" width="560" height="360" rx="26" fill="url(#plt-bg)"/>
+  <!-- Glassmorphism border — subtle indigo-tinted rim -->
+  <rect x="40" y="30" width="560" height="360" rx="26" stroke="rgba(120,130,220,0.18)" stroke-width="1.5" fill="none"/>
 
-  <!-- Ambient glow halo behind disk -->
-  <ellipse cx="320" cy="214" rx="150" ry="150" fill="rgba(99,102,241,0.05)"/>
+  <!-- Outer ambient glow halo — two layers for gradual falloff -->
+  <ellipse cx="320" cy="214" rx="175" ry="175" fill="rgba(99,102,241,0.07)"/>
+  <ellipse cx="320" cy="214" rx="145" ry="145" fill="rgba(99,102,241,0.07)"/>
 
   <!-- Drop shadow layer -->
   <g filter="url(#plt-disk-shadow)">
@@ -93,37 +96,41 @@
     <!-- Platter base -->
     <circle cx="320" cy="210" r="132" fill="url(#plt-main)"/>
 
-    <!-- Outer rim line — catches light -->
-    <circle cx="320" cy="210" r="131.5" stroke="rgba(255,255,255,0.11)" stroke-width="1"/>
+    <!-- Outer rim — bright catch-light separates disk from background -->
+    <circle cx="320" cy="210" r="131.5" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
 
-    <!-- Concentric data tracks -->
-    <circle cx="320" cy="210" r="118" stroke="rgba(255,255,255,0.10)" stroke-width="0.9" fill="none"/>
-    <circle cx="320" cy="210" r="105" stroke="rgba(255,255,255,0.09)" stroke-width="0.85" fill="none"/>
-    <circle cx="320" cy="210" r="92"  stroke="rgba(255,255,255,0.08)" stroke-width="0.8"  fill="none"/>
-    <circle cx="320" cy="210" r="79"  stroke="rgba(255,255,255,0.07)" stroke-width="0.75" fill="none"/>
-    <circle cx="320" cy="210" r="66"  stroke="rgba(255,255,255,0.06)" stroke-width="0.7"  fill="none"/>
-    <circle cx="320" cy="210" r="54"  stroke="rgba(255,255,255,0.06)" stroke-width="0.65" fill="none"/>
+    <!-- Concentric data tracks — doubled contrast -->
+    <circle cx="320" cy="210" r="118" stroke="rgba(255,255,255,0.20)" stroke-width="0.9" fill="none"/>
+    <circle cx="320" cy="210" r="105" stroke="rgba(255,255,255,0.18)" stroke-width="0.85" fill="none"/>
+    <circle cx="320" cy="210" r="92"  stroke="rgba(255,255,255,0.16)" stroke-width="0.8"  fill="none"/>
+    <circle cx="320" cy="210" r="79"  stroke="rgba(255,255,255,0.14)" stroke-width="0.75" fill="none"/>
+    <circle cx="320" cy="210" r="66"  stroke="rgba(255,255,255,0.12)" stroke-width="0.7"  fill="none"/>
+    <circle cx="320" cy="210" r="54"  stroke="rgba(255,255,255,0.10)" stroke-width="0.65" fill="none"/>
 
     <!-- Inner landing zone -->
     <circle cx="320" cy="210" r="46" fill="url(#plt-inner)"/>
-    <circle cx="320" cy="210" r="46" stroke="rgba(255,255,255,0.06)" stroke-width="0.7" fill="none"/>
+    <circle cx="320" cy="210" r="46" stroke="rgba(255,255,255,0.12)" stroke-width="0.7" fill="none"/>
 
     <!-- Specular highlight glare — sweeps as disk spins -->
-    <ellipse cx="386" cy="148" rx="48" ry="26" fill="url(#plt-glare-a)"/>
+    <ellipse cx="386" cy="148" rx="58" ry="32" fill="url(#plt-glare-a)"/>
 
     <!-- Secondary counter-highlight — blue tint -->
     <ellipse cx="254" cy="272" rx="32" ry="18" fill="url(#plt-glare-b)"/>
 
+    <!-- Light streak arcs — dashed overlays that simulate spinning speed blur -->
+    <circle cx="320" cy="210" r="108" stroke="rgba(255,255,255,0.07)" stroke-width="8" fill="none" stroke-dasharray="68 272"/>
+    <circle cx="320" cy="210" r="85"  stroke="rgba(180,190,255,0.05)" stroke-width="6" fill="none" stroke-dasharray="42 220"/>
+
     <!-- Hub disk -->
     <circle cx="320" cy="210" r="17" fill="url(#plt-hub)"/>
-    <circle cx="320" cy="210" r="17" stroke="rgba(255,255,255,0.07)" stroke-width="0.8" fill="none"/>
+    <circle cx="320" cy="210" r="17" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" fill="none"/>
 
     <!-- Hub highlight dot -->
-    <circle cx="315" cy="205" r="3.5" fill="rgba(255,255,255,0.12)"/>
+    <circle cx="315" cy="205" r="3.5" fill="rgba(255,255,255,0.32)"/>
 
     <!-- Hub center pin -->
-    <circle cx="320" cy="210" r="6" fill="#2c304e"/>
-    <circle cx="320" cy="210" r="2.5" fill="#3e4468"/>
+    <circle cx="320" cy="210" r="6" fill="#383c62"/>
+    <circle cx="320" cy="210" r="2.5" fill="#505688"/>
   </g>
   <!-- ── End spinning group ── -->
 

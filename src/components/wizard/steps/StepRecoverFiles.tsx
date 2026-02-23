@@ -20,9 +20,9 @@ const steps = [
   },
   {
     n: 4,
-    label: "Choose your THIRD drive as the destination.",
+    label: "Choose your destination drive.",
     detail:
-      "This must be a completely separate drive — not the cloned drive and not the patient drive. Navigate to it in the dialog and click OK.",
+      "Select a separate external drive (recommended) or your computer's internal drive if it has enough free space — not the cloned drive and not the patient drive. Navigate to it in the dialog and click OK.",
   },
   {
     n: 5,
@@ -42,7 +42,7 @@ export default function StepRecoverFiles({
     <StepLayout
       stepLabel="Step 14"
       title="Recover your files"
-      subtitle="Save recovered files to a separate third drive — never back onto the clone."
+      subtitle="Save recovered files to a separate third drive — or to your computer's internal drive if it has enough free space. Never save files back onto the clone."
       onBack={onBack}
       onNext={onNext}
       canGoBack={canGoBack}
@@ -50,11 +50,16 @@ export default function StepRecoverFiles({
     >
       <div className="space-y-3">
         <div className="rounded-xl border-2 border-[rgba(248,113,113,0.5)] bg-[rgba(248,113,113,0.12)] p-5">
-          <p className="font-bold text-[#f87171]">⚠ You need a THIRD, separate drive to save recovered files</p>
+          <p className="font-bold text-[#f87171]">⚠ Never save recovered files back onto the clone or the patient drive</p>
           <p className="mt-2 text-sm text-[#fca5a5]">
-            You cannot save recovered files back onto the cloned drive or the patient drive. You
-            need a completely separate drive — an external hard drive, USB drive, or cloud storage —
-            with enough free space for your files.
+            You may save recovered files to:
+          </p>
+          <ul className="mt-1.5 list-disc space-y-1 pl-5 text-sm text-[#fca5a5]">
+            <li>A separate external drive (recommended), OR</li>
+            <li>Your computer&apos;s internal drive, as long as it has enough available space.</li>
+          </ul>
+          <p className="mt-2 text-sm font-semibold text-[#f87171]">
+            Never save to the cloned drive. Never save to the original patient drive.
           </p>
         </div>
 
@@ -80,7 +85,7 @@ export default function StepRecoverFiles({
           <p className="mt-1.5 text-sm text-[#fca5a5]">
             Saving recovered files onto the clone can overwrite sectors that contain data you have
             not yet recovered. Once overwritten, that data is gone permanently. Always use a
-            different, dedicated drive for recovered files.
+            different destination — a separate external drive or your computer&apos;s internal drive.
           </p>
         </div>
 
@@ -104,8 +109,9 @@ export default function StepRecoverFiles({
             <div className="flex items-start gap-2.5">
               <span className="shrink-0 text-[#7b8cde]">③</span>
               <span>
-                <strong className="text-[#e8eaed]">Third drive</strong> — where your recovered files
-                land. This is your destination.
+                <strong className="text-[#e8eaed]">Destination drive</strong> — where your recovered
+                files land. This can be a separate external drive (recommended), or your
+                computer&apos;s internal drive if it has enough free space.
               </span>
             </div>
           </div>

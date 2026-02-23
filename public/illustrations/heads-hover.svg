@@ -28,73 +28,73 @@
   </style>
 
   <defs>
-    <!-- Dark panel background -->
+    <!-- Panel background — slightly lighter than pure black for depth -->
     <radialGradient id="hd-bg" cx="50%" cy="50%" r="70%" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 210) scale(300 200)">
-      <stop stop-color="#181b2c"/>
-      <stop offset="1" stop-color="#0c0e18"/>
+      <stop stop-color="#1e2133"/>
+      <stop offset="1" stop-color="#0f1120"/>
     </radialGradient>
 
-    <!-- Platter top face — dark metallic, lighter center simulates ambient light -->
+    <!-- Platter top face — brighter center for visibility -->
     <linearGradient id="hd-plt-top" x1="150" y1="252" x2="500" y2="252" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#181c30"/>
-      <stop offset="0.25" stop-color="#232843"/>
-      <stop offset="0.5" stop-color="#2a3050"/>
-      <stop offset="0.75" stop-color="#232843"/>
-      <stop offset="1" stop-color="#181c30"/>
+      <stop stop-color="#1e223a"/>
+      <stop offset="0.25" stop-color="#2b3054"/>
+      <stop offset="0.5" stop-color="#35406a"/>
+      <stop offset="0.75" stop-color="#2b3054"/>
+      <stop offset="1" stop-color="#1e223a"/>
     </linearGradient>
 
-    <!-- Platter edge/side — darker underside -->
+    <!-- Platter edge/side — slightly lighter underside -->
     <linearGradient id="hd-plt-edge" x1="150" y1="265" x2="500" y2="265" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0e1020"/>
-      <stop offset="0.5" stop-color="#141728"/>
-      <stop offset="1" stop-color="#0e1020"/>
+      <stop stop-color="#141628"/>
+      <stop offset="0.5" stop-color="#1a1e35"/>
+      <stop offset="1" stop-color="#141628"/>
     </linearGradient>
 
-    <!-- Platter surface sheen — subtle highlight on spinning disk top -->
+    <!-- Platter surface sheen — 3× brighter highlight -->
     <linearGradient id="hd-plt-sheen" x1="200" y1="248" x2="450" y2="248" gradientUnits="userSpaceOnUse">
       <stop stop-color="rgba(255,255,255,0)"/>
-      <stop offset="0.35" stop-color="rgba(255,255,255,0.05)"/>
-      <stop offset="0.65" stop-color="rgba(255,255,255,0.02)"/>
+      <stop offset="0.35" stop-color="rgba(255,255,255,0.15)"/>
+      <stop offset="0.65" stop-color="rgba(255,255,255,0.08)"/>
       <stop offset="1" stop-color="rgba(255,255,255,0)"/>
     </linearGradient>
 
-    <!-- Actuator arm — dark gunmetal -->
+    <!-- Actuator arm — brighter gunmetal so arm is clearly visible -->
     <linearGradient id="hd-arm" x1="190" y1="130" x2="395" y2="215" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#404868"/>
-      <stop offset="0.5" stop-color="#2e3450"/>
-      <stop offset="1" stop-color="#1e2238"/>
+      <stop stop-color="#555e88"/>
+      <stop offset="0.5" stop-color="#3d4568"/>
+      <stop offset="1" stop-color="#28304e"/>
     </linearGradient>
 
-    <!-- Arm edge highlight -->
+    <!-- Arm edge highlight — brighter top-edge catch-light -->
     <linearGradient id="hd-arm-hi" x1="190" y1="124" x2="395" y2="209" gradientUnits="userSpaceOnUse">
-      <stop stop-color="rgba(255,255,255,0.12)"/>
-      <stop offset="1" stop-color="rgba(255,255,255,0.02)"/>
+      <stop stop-color="rgba(255,255,255,0.30)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.08)"/>
     </linearGradient>
 
-    <!-- Head body — dark slate with slight blue metallic -->
+    <!-- Head body — brighter blue metallic -->
     <linearGradient id="hd-head-body" x1="345" y1="196" x2="400" y2="226" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2c3358"/>
-      <stop offset="1" stop-color="#1c2040"/>
+      <stop stop-color="#3d4880"/>
+      <stop offset="1" stop-color="#28305e"/>
     </linearGradient>
 
-    <!-- Head top highlight -->
+    <!-- Head top highlight — more visible specular -->
     <linearGradient id="hd-head-hi" x1="365" y1="200" x2="392" y2="210" gradientUnits="userSpaceOnUse">
-      <stop stop-color="rgba(180,192,255,0.35)"/>
-      <stop offset="1" stop-color="rgba(120,140,220,0.10)"/>
+      <stop stop-color="rgba(200,210,255,0.62)"/>
+      <stop offset="1" stop-color="rgba(160,180,255,0.25)"/>
     </linearGradient>
 
-    <!-- Air-cushion shadow below head -->
+    <!-- Air-cushion shadow below head — stronger -->
     <radialGradient id="hd-shadow" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse" gradientTransform="translate(364 238) scale(52 10)">
-      <stop stop-color="#6366f1" stop-opacity="0.55"/>
-      <stop offset="0.6" stop-color="#6366f1" stop-opacity="0.18"/>
+      <stop stop-color="#6366f1" stop-opacity="0.75"/>
+      <stop offset="0.6" stop-color="#6366f1" stop-opacity="0.30"/>
       <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Pivot hub gradient -->
+    <!-- Pivot hub gradient — brighter -->
     <radialGradient id="hd-pivot" cx="35%" cy="30%" r="65%" gradientUnits="objectBoundingBox">
-      <stop stop-color="#3a4060"/>
-      <stop offset="0.6" stop-color="#252942"/>
-      <stop offset="1" stop-color="#1a1d34"/>
+      <stop stop-color="#4e5580"/>
+      <stop offset="0.6" stop-color="#323860"/>
+      <stop offset="1" stop-color="#22264e"/>
     </radialGradient>
 
     <!-- Disk drop shadow -->
@@ -109,10 +109,10 @@
       <feBlend mode="normal" in="SourceGraphic" in2="shadow" result="out"/>
     </filter>
 
-    <!-- Head assembly soft glow -->
+    <!-- Head assembly glow — 2× stronger indigo bloom -->
     <filter id="hd-head-glow" x="-30%" y="-60%" width="160%" height="220%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feFlood flood-color="#6366f1" flood-opacity="0.18" result="color"/>
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feFlood flood-color="#6366f1" flood-opacity="0.40" result="color"/>
       <feComposite in="color" in2="blur" operator="in" result="glow"/>
       <feBlend in="SourceGraphic" in2="glow" mode="normal"/>
     </filter>
@@ -120,9 +120,11 @@
 
   <!-- Background panel -->
   <rect x="40" y="30" width="560" height="360" rx="26" fill="url(#hd-bg)"/>
+  <!-- Glassmorphism border — subtle indigo-tinted rim -->
+  <rect x="40" y="30" width="560" height="360" rx="26" stroke="rgba(120,130,220,0.18)" stroke-width="1.5" fill="none"/>
 
-  <!-- Subtle ambient glow behind platter area -->
-  <ellipse cx="325" cy="265" rx="185" ry="45" fill="rgba(99,102,241,0.04)"/>
+  <!-- Ambient glow behind platter area — 3× stronger -->
+  <ellipse cx="325" cy="265" rx="185" ry="45" fill="rgba(99,102,241,0.12)"/>
 
   <!-- Platter disk with drop shadow -->
   <g filter="url(#hd-disk-shadow)">
@@ -133,44 +135,44 @@
   <!-- Top face surface sheen overlay -->
   <ellipse cx="325" cy="250" rx="175" ry="38" fill="url(#hd-plt-sheen)"/>
 
-  <!-- Rim lines -->
-  <ellipse cx="325" cy="252" rx="175" ry="40" stroke="rgba(255,255,255,0.07)" stroke-width="0.8" fill="none"/>
-  <ellipse cx="325" cy="264" rx="175" ry="40" stroke="rgba(255,255,255,0.04)" stroke-width="0.8" fill="none"/>
+  <!-- Rim lines — 3× more visible, separates disk from background -->
+  <ellipse cx="325" cy="252" rx="175" ry="40" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" fill="none"/>
+  <ellipse cx="325" cy="264" rx="175" ry="40" stroke="rgba(255,255,255,0.10)" stroke-width="0.8" fill="none"/>
 
   <!-- Spindle hole -->
   <ellipse cx="325" cy="252" rx="13" ry="6" fill="#1a1e34"/>
-  <ellipse cx="325" cy="252" rx="13" ry="6" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" fill="none"/>
+  <ellipse cx="325" cy="252" rx="13" ry="6" stroke="rgba(255,255,255,0.16)" stroke-width="0.8" fill="none"/>
 
   <!-- Air-cushion shadow — stays fixed, breathes independently via opacity -->
   <ellipse cx="364" cy="238" rx="52" ry="10" fill="url(#hd-shadow)" class="headShadowBreath"/>
 
   <!-- ── Floating group — arm, hub, head, and air gap rise together ── -->
   <g class="headFloat">
-    <!-- Actuator arm body -->
+    <!-- Actuator arm body — brighter -->
     <path d="M190 134 C236 124 274 136 308 158 L394 214" stroke="url(#hd-arm)" stroke-width="16" stroke-linecap="round" fill="none"/>
-    <!-- Arm top-edge highlight -->
-    <path d="M190 129 C236 119 274 131 308 153 L394 209" stroke="url(#hd-arm-hi)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.55"/>
+    <!-- Arm top-edge highlight — brighter and more opaque -->
+    <path d="M190 129 C236 119 274 131 308 153 L394 209" stroke="url(#hd-arm-hi)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.85"/>
 
-    <!-- Pivot hub -->
+    <!-- Pivot hub — brighter -->
     <circle cx="188" cy="134" r="24" fill="url(#hd-pivot)"/>
-    <circle cx="188" cy="134" r="24" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" fill="none"/>
-    <circle cx="188" cy="134" r="11" fill="#1e2238"/>
-    <circle cx="183" cy="129" r="4" fill="rgba(255,255,255,0.09)"/>
+    <circle cx="188" cy="134" r="24" stroke="rgba(255,255,255,0.16)" stroke-width="0.8" fill="none"/>
+    <circle cx="188" cy="134" r="11" fill="#252b45"/>
+    <circle cx="183" cy="129" r="4" fill="rgba(255,255,255,0.22)"/>
 
-    <!-- Read/write head assembly with soft glow -->
+    <!-- Read/write head assembly with stronger glow -->
     <g filter="url(#hd-head-glow)">
       <!-- Head body -->
       <path d="M374 197 L401 214 L372 226 L345 209 Z" fill="url(#hd-head-body)"/>
       <!-- Head top highlight surface -->
       <path d="M380 202 L394 210 L378 216 L365 208 Z" fill="url(#hd-head-hi)"/>
-      <!-- Leading edge read element -->
-      <line x1="345" y1="209" x2="372" y2="226" stroke="rgba(180,200,255,0.22)" stroke-width="1.2"/>
+      <!-- Leading edge read element — brighter blue -->
+      <line x1="345" y1="209" x2="372" y2="226" stroke="rgba(180,200,255,0.55)" stroke-width="1.5"/>
       <!-- Trailing edge subtle line -->
-      <line x1="374" y1="197" x2="401" y2="214" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+      <line x1="374" y1="197" x2="401" y2="214" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
     </g>
 
-    <!-- Air gap indicator — indigo dashed line -->
-    <line x1="325" y1="228" x2="325" y2="242" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2.5" opacity="0.45"/>
+    <!-- Air gap indicator — brighter indigo dashed line -->
+    <line x1="325" y1="228" x2="325" y2="242" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2.5" opacity="0.70"/>
   </g>
   <!-- ── End floating group ── -->
 </svg>

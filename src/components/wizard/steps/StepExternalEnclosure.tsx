@@ -96,8 +96,8 @@ export default function StepExternalEnclosure({
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:mt-3 lg:gap-3">
             <div className="rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#22263a] p-4 shadow-[0_4px_24px_rgba(0,0,0,0.35)] lg:p-3">
               <Image
-                src="/illustrations/open-enclosure-35.png"
-                alt="3.5-inch desktop enclosure opening example"
+                src="/illustrations/35-opening.png"
+                alt="3.5 inch hard drive opening"
                 width={640}
                 height={420}
                 className="h-auto w-full rounded-lg object-contain"
@@ -109,8 +109,8 @@ export default function StepExternalEnclosure({
 
             <div className="rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#22263a] p-4 shadow-[0_4px_24px_rgba(0,0,0,0.35)] lg:p-3">
               <Image
-                src="/illustrations/open-enclosure-25.png"
-                alt="2.5-inch portable enclosure opening example"
+                src="/illustrations/25-opening.png"
+                alt="2.5 inch hard drive opening"
                 width={640}
                 height={420}
                 className="h-auto w-full rounded-lg object-contain"

@@ -135,13 +135,13 @@ export default function Wizard() {
     currentStep === "not_spinning_stop" ||
     currentStep === "spins_down_stop" ||
     currentStep === "clicking_stop" ||
-    (currentStep === "smart_health" && answers.smart.smartHealth === "bad");
+    (currentStep === "smart_health" && (answers.smart.smartHealth === "bad" || answers.smart.smartHealth === "not_detected"));
   const stepLabels = steps.map((id) => STEP_LABELS[id] ?? id);
 
   const canGoNext = useMemo(() => {
     if (currentStep === "external_enclosure") return answers.externalEnclosure !== null;
     if (currentStep === "listen_test") return answers.listenTest !== null;
-    if (currentStep === "smart_health") return answers.smart.smartHealth !== null && answers.smart.smartHealth !== "bad";
+    if (currentStep === "smart_health") return answers.smart.smartHealth !== null && answers.smart.smartHealth !== "bad" && answers.smart.smartHealth !== "not_detected";
     if (
       currentStep === "finish" ||
       currentStep === "quote_form" ||
@@ -197,8 +197,8 @@ export default function Wizard() {
       setCurrentStepIndex(targetIndex);
       return;
     }
-    // Forward: only one step at a time, canGoNext must be true, no hard stop
-    if (targetIndex === boundedStepIndex + 1 && canGoNext && !isHardStop) {
+    // Forward: allow any future step when no hard stop is active
+    if (!isHardStop) {
       scrollToTop();
       setCurrentStepIndex(targetIndex);
     }

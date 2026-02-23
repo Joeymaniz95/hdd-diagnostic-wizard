@@ -10,7 +10,7 @@ export type ListenTestResult =
   | "spins_then_spins_down"
   | "clicking";
 
-export type SmartHealth = "good" | "caution" | "bad";
+export type SmartHealth = "good" | "caution" | "bad" | "not_detected";
 
 export type WizardAnswers = {
   externalEnclosure: boolean | null;
