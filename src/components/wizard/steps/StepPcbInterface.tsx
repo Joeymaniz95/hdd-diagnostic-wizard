@@ -84,8 +84,8 @@ export default function StepPcbInterface({
         <p className="mt-2 font-medium text-[#fbbf24]">Do NOT attempt to desolder or modify the board.</p>
         <div className="mt-4 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#1a1d27] p-3 shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
           <Image
-            src="/illustrations/usb-native-highlight.png"
-            alt="USB connector soldered directly to the PCB"
+            src="/illustrations/hdd-usb.png"
+            alt="Hard drive with USB connector soldered directly to the PCB"
             width={900}
             height={560}
             className="max-h-[350px] w-full rounded-xl object-cover object-center"
