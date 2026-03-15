@@ -18,7 +18,6 @@ import StepPostClone from "@/src/components/wizard/steps/StepPostClone";
 import StepScanClone from "@/src/components/wizard/steps/StepScanClone";
 import StepRecoverFiles from "@/src/components/wizard/steps/StepRecoverFiles";
 import StepFinish from "@/src/components/wizard/steps/StepFinish";
-import StepQuoteForm from "@/src/components/wizard/steps/StepQuoteForm";
 import StepSpinsDown from "@/src/components/wizard/steps/StepSpinsDown";
 import StepNotSpinning from "@/src/components/wizard/steps/StepNotSpinning";
 import StepClicking from "@/src/components/wizard/steps/StepClicking";
@@ -42,7 +41,6 @@ const STEP_LABELS: Record<string, string> = {
   scan_clone: "Scan clone",
   recover_files: "Recover files",
   finish: "Finish",
-  quote_form: "Get quote",
   spins_down_stop: "Recovery required",
   not_spinning_stop: "Recovery required",
   clicking_stop: "Recovery required",
@@ -65,7 +63,6 @@ type StepId =
   | "scan_clone"
   | "recover_files"
   | "finish"
-  | "quote_form"
   | "spins_down_stop"
   | "not_spinning_stop"
   | "clicking_stop";
@@ -86,8 +83,6 @@ const initialAnswers: WizardAnswers = {
 export default function Wizard() {
   const [answers, setAnswers] = useState<WizardAnswers>(initialAnswers);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [showQuotePlaceholder, setShowQuotePlaceholder] = useState(false);
-
   const steps = useMemo<StepId[]>(() => {
     const ordered: StepId[] = ["how_drive_works", "external_enclosure"];
 
@@ -102,11 +97,11 @@ export default function Wizard() {
     }
 
     if (answers.listenTest === "not_spinning") {
-      ordered.push("not_spinning_stop", "quote_form");
+      ordered.push("not_spinning_stop");
     } else if (answers.listenTest === "spins_then_spins_down") {
-      ordered.push("spins_down_stop", "quote_form");
+      ordered.push("spins_down_stop");
     } else if (answers.listenTest === "clicking") {
-      ordered.push("clicking_stop", "quote_form");
+      ordered.push("clicking_stop");
     } else {
       ordered.push(
         "result",
@@ -119,7 +114,6 @@ export default function Wizard() {
         "scan_clone",
         "recover_files",
         "finish",
-        "quote_form",
       );
     }
 
@@ -144,7 +138,6 @@ export default function Wizard() {
     if (currentStep === "smart_health") return answers.smart.smartHealth !== null && answers.smart.smartHealth !== "bad" && answers.smart.smartHealth !== "not_detected";
     if (
       currentStep === "finish" ||
-      currentStep === "quote_form" ||
       currentStep === "spins_down_stop" ||
       currentStep === "not_spinning_stop" ||
       currentStep === "clicking_stop"
@@ -180,14 +173,16 @@ export default function Wizard() {
 
   function restart() {
     setAnswers(initialAnswers);
-    setShowQuotePlaceholder(false);
     setCurrentStepIndex(0);
   }
 
   function goToQuote() {
-    scrollToTop();
-    // quote_form is always the last step in the array
-    setCurrentStepIndex(steps.length - 1);
+    // Tell parent page to scroll to the Gravity Form quote section
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: "scrollToQuote" }, "*");
+    } else {
+      window.location.href = "#quote-section";
+    }
   }
 
   function handleStepClick(targetIndex: number) {
@@ -292,7 +287,7 @@ export default function Wizard() {
           <StepResult
             answers={answers}
             result={result}
-            onContinueDiy={() => setShowQuotePlaceholder(false)}
+            onContinueDiy={() => {}}
             onGetQuote={goToQuote}
             showQuotePlaceholder={false}
             onBack={goBack}
@@ -414,14 +409,6 @@ export default function Wizard() {
           />
         ) : null}
 
-        {currentStep === "quote_form" ? (
-          <StepQuoteForm
-            onBack={goBack}
-            onNext={goNext}
-            canGoBack={canGoBack}
-            canGoNext={canGoNext}
-          />
-        ) : null}
       </div>
     </div>
   );
